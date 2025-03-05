@@ -1,8 +1,8 @@
 import { CRUD } from "./crud";
-import { Chat } from "./chat";
+import { Chat } from "./chats";
 
-export const API = {
-  user: new CRUD("user"),
-  diet: new CRUD("diet"),
-  chat: Chat,
+export const api = {
+  users: new CRUD("users"),
+  diets: new CRUD("diets"),
+  chats: Chat,
 }

@@ -1,4 +1,4 @@
-import { client } from "../api/crud";
+import { client } from "./crud";
 
 export interface CreateChatParams {
   refer_id: string; // <WA_ID>

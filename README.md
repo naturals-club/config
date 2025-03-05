@@ -4,10 +4,10 @@ Library containing all the basic configuration files for the project.
 
 ## Setup
 
-1. Install dependencies:
+1. Install package:
 
 ```bash
-npm install
+npm install git+https://github.com/naturals-club/config.git
 ```
 
 2. Configure environment variables in the `.env` file:
@@ -77,22 +77,22 @@ The API client provides an intuitive method structure, following the `api[model]
 #### Example:
 
 ```ts
-import { API } from "@naturals/config";
+import { api } from "@naturals/config";
 
 // List users
-const users = await API.user.list({ page: 1, limit: 10 });
+const users = await api.user.list({ page: 1, limit: 10 });
 
 // Get a specific user
-const user = await API.user.get(1);
+const user = await api.user.get(1);
 
 // Edit a user
-const updatedUser = await API.user.edit(1, { name: "New Name" });
+const updatedUser = await api.user.edit(1, { name: "New Name" });
 
 // Delete a user
-await API.user.delete(1);
+await api.user.delete(1);
 
 // Search for users
-const searchResults = await API.user.search({ query: "John Doe" });
+const searchResults = await api.user.search({ query: "John Doe" });
 ```
 
 ### Methods for CRUD operations:
