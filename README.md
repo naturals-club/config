@@ -7,7 +7,7 @@ Library containing all the basic configuration files for the project.
 1. Install package:
 
 ```bash
-npm install git+https://github.com/naturals-club/config.git
+npm install git+https://github.com/naturals-club/config
 ```
 
 2. Configure environment variables in the `.env` file:
