@@ -64,16 +64,4 @@ export class CRUD {
       throw error;
     }
   }
-
-  async search(query?: any) {
-    try {
-      const queryString = new URLSearchParams(query).toString();
-      const response = await this.client.get(`/${this.entity}/search?${queryString}`) as any;
-
-      return response.data;
-    } catch (error) {
-      console.error(`Error searching ${this.entity}:`, error);
-      throw error;
-    }
-  }
 }

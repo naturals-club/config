@@ -90,9 +90,6 @@ const updatedUser = await api.user.edit(1, { name: "New Name" });
 
 // Delete a user
 await api.user.delete(1);
-
-// Search for users
-const searchResults = await api.user.search({ query: "John Doe" });
 ```
 
 ### Methods for CRUD operations:
@@ -101,7 +98,6 @@ const searchResults = await api.user.search({ query: "John Doe" });
 - **get(id: number)**: Fetches a specific item by its ID.
 - **edit(id: number, data: any)**: Edits a specific item by its ID with the provided data.
 - **delete(id: number)**: Deletes a specific item by its ID.
-- **search(params?: any)**: Searches for items based on given parameters.
 
 ## AI
 
