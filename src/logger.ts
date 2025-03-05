@@ -23,28 +23,30 @@ export const logger = winston.createLogger({
   ],
 });
 
-const oldConsole = global.console;
-global.console = {
-  log: (...args) => {
-    logger.info(args.map(String).join(" "));
-    oldConsole.log(...args);
-  },
-  error: (...args) => {
-    logger.error(args.map(String).join(" "));
-    oldConsole.error(...args);
-  },
-  warn: (...args) => {
-    logger.warn(args.map(String).join(" "));
-    oldConsole.warn(...args);
-  },
-  info: (...args) => {
-    logger.info(args.map(String).join(" "));
-    oldConsole.info(...args);
-  },
-  debug: (...args) => {
-    logger.debug(args.map(String).join(" "));
-    oldConsole.debug(...args);
-  },
-} as any as Console;
-
 export default logger;
+
+if (process.env.NODE_ENV === "production") {
+  const oldConsole = global.console;
+  global.console = {
+    log: (...args) => {
+      logger.info(args.map(String).join(" "));
+      oldConsole.log(...args);
+    },
+    error: (...args) => {
+      logger.error(args.map(String).join(" "));
+      oldConsole.error(...args);
+    },
+    warn: (...args) => {
+      logger.warn(args.map(String).join(" "));
+      oldConsole.warn(...args);
+    },
+    info: (...args) => {
+      logger.info(args.map(String).join(" "));
+      oldConsole.info(...args);
+    },
+    debug: (...args) => {
+      logger.debug(args.map(String).join(" "));
+      oldConsole.debug(...args);
+    },
+  } as any as Console;
+}

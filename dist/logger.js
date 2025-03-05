@@ -22,27 +22,29 @@ exports.logger = winston_1.default.createLogger({
         new winston_1.default.transports.Console(),
     ],
 });
-const oldConsole = global.console;
-global.console = {
-    log: (...args) => {
-        exports.logger.info(args.map(String).join(" "));
-        oldConsole.log(...args);
-    },
-    error: (...args) => {
-        exports.logger.error(args.map(String).join(" "));
-        oldConsole.error(...args);
-    },
-    warn: (...args) => {
-        exports.logger.warn(args.map(String).join(" "));
-        oldConsole.warn(...args);
-    },
-    info: (...args) => {
-        exports.logger.info(args.map(String).join(" "));
-        oldConsole.info(...args);
-    },
-    debug: (...args) => {
-        exports.logger.debug(args.map(String).join(" "));
-        oldConsole.debug(...args);
-    },
-};
 exports.default = exports.logger;
+if (process.env.NODE_ENV === "production") {
+    const oldConsole = global.console;
+    global.console = {
+        log: (...args) => {
+            exports.logger.info(args.map(String).join(" "));
+            oldConsole.log(...args);
+        },
+        error: (...args) => {
+            exports.logger.error(args.map(String).join(" "));
+            oldConsole.error(...args);
+        },
+        warn: (...args) => {
+            exports.logger.warn(args.map(String).join(" "));
+            oldConsole.warn(...args);
+        },
+        info: (...args) => {
+            exports.logger.info(args.map(String).join(" "));
+            oldConsole.info(...args);
+        },
+        debug: (...args) => {
+            exports.logger.debug(args.map(String).join(" "));
+            oldConsole.debug(...args);
+        },
+    };
+}
