@@ -67,16 +67,5 @@ class CRUD {
             throw error;
         }
     }
-    async search(query) {
-        try {
-            const queryString = new URLSearchParams(query).toString();
-            const response = await this.client.get(`/${this.entity}/search?${queryString}`);
-            return response.data;
-        }
-        catch (error) {
-            console.error(`Error searching ${this.entity}:`, error);
-            throw error;
-        }
-    }
 }
 exports.CRUD = CRUD;

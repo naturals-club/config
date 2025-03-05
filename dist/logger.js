@@ -28,9 +28,21 @@ global.console = {
         exports.logger.info(args.map(String).join(" "));
         oldConsole.log(...args);
     },
-    error: (...args) => exports.logger.error(args.map(String).join(" ")),
-    warn: (...args) => exports.logger.warn(args.map(String).join(" ")),
-    info: (...args) => exports.logger.info(args.map(String).join(" ")),
-    debug: (...args) => exports.logger.debug(args.map(String).join(" ")),
+    error: (...args) => {
+        exports.logger.error(args.map(String).join(" "));
+        oldConsole.error(...args);
+    },
+    warn: (...args) => {
+        exports.logger.warn(args.map(String).join(" "));
+        oldConsole.warn(...args);
+    },
+    info: (...args) => {
+        exports.logger.info(args.map(String).join(" "));
+        oldConsole.info(...args);
+    },
+    debug: (...args) => {
+        exports.logger.debug(args.map(String).join(" "));
+        oldConsole.debug(...args);
+    },
 };
 exports.default = exports.logger;
