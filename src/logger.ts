@@ -1,4 +1,3 @@
-import { ecsFormat } from "@elastic/ecs-winston-format";
 import winston from "winston";
 import ENV from "./env";
 
@@ -8,7 +7,6 @@ const PROJECT_NAME = ENV.NC_PROJECT_NAME || "naturals-club-core";
 export const logger = winston.createLogger({
   level: "info",
   format: winston.format.combine(
-    ecsFormat(),
     winston.format.timestamp(),
     winston.format.json()
   ),
