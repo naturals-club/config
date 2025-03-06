@@ -44,7 +44,7 @@ class HttpClient {
             if (!response.ok) {
                 throw new Error(data?.message || `Request failed with status ${response.status}`);
             }
-            logger_1.default.info(`Response from ${method}: ${fullUrl}`, { data });
+            logger_1.default.info(`Response from ${method}: ${fullUrl}`, data);
             return data.data;
         }
         catch (error) {

@@ -6,7 +6,10 @@ exports.Chat = {
     status: () => crud_1.client.get("/chats/instance/status"),
     qrcode: () => crud_1.client.get("/chats/instance/qr-code"),
     list: async () => crud_1.client.get("/chats"),
-    get: async (id) => crud_1.client.get(`/chats?refer_id=${id}`).then((res) => res.data.items[0]),
+    get: async (id) => crud_1.client.get(`/chats?refer_id=${id}`).then((res) => {
+        console.log(res);
+        return res.items[0];
+    }),
     create: async (data) => crud_1.client.post(`/chats`, data),
     update: Object.assign(async (id, data) => crud_1.client.put(`/chats/${id}`, data), {
         agent: async (id) => crud_1.client.put(`/chats/${id}/ai`),
