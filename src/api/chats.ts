@@ -12,8 +12,8 @@ export const Chat = {
   qrcode: () => client.get("/chats/instance/qr-code") as any,
   list: async () => client.get("/chats") as any,
   get: async (id: string) => client.get(`/chats?refer_id=${id}`).then((res: any) => {
-    console.log(res)
-    return res.items[0]
+    console.log({ res });
+    return res.items[0];
   }),
   create: async (data: CreateChatParams) => client.post(`/chats`, data) as any,
   update: Object.assign(
