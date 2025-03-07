@@ -2,7 +2,9 @@ import { CRUD } from "./crud";
 import { Chat } from "./chats";
 
 export const api = {
+  students: new CRUD("students"),
+  contacts: new CRUD("contacts"),
   users: new CRUD("users"),
-  diets: new CRUD("diets"),
+  plans: new CRUD("plans"),
   chats: Chat,
 }
