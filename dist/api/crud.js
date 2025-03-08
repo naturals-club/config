@@ -1,11 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CRUD = void 0;
 const logger_1 = require("../logger");
-const client_1 = __importDefault(require("./client"));
+const client_1 = require("./client");
 class CRUD {
     entity;
     constructor(entity) {
@@ -14,7 +11,7 @@ class CRUD {
     async list(params = {}) {
         try {
             const queryString = new URLSearchParams(params).toString();
-            const response = await client_1.default.get(`/${this.entity}?${queryString}`);
+            const response = await client_1.client.get(`/${this.entity}?${queryString}`);
             return response?.data;
         }
         catch (error) {
@@ -24,7 +21,7 @@ class CRUD {
     }
     async get(id) {
         try {
-            const response = await client_1.default.get(`/${this.entity}/${id}`);
+            const response = await client_1.client.get(`/${this.entity}/${id}`);
             return response?.data;
         }
         catch (error) {
@@ -34,7 +31,7 @@ class CRUD {
     }
     async create(data) {
         try {
-            const response = await client_1.default.post(`/${this.entity}`, data);
+            const response = await client_1.client.post(`/${this.entity}`, data);
             return response?.data;
         }
         catch (error) {
@@ -44,7 +41,7 @@ class CRUD {
     }
     async update(id, data) {
         try {
-            const response = await client_1.default.put(`/${this.entity}/${id}`, data);
+            const response = await client_1.client.put(`/${this.entity}/${id}`, data);
             return response?.data;
         }
         catch (error) {
@@ -54,7 +51,7 @@ class CRUD {
     }
     async delete(id) {
         try {
-            const response = await client_1.default.delete(`/${this.entity}/${id}`);
+            const response = await client_1.client.delete(`/${this.entity}/${id}`);
             return response?.data;
         }
         catch (error) {

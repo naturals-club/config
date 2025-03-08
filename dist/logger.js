@@ -54,7 +54,7 @@ class Logger {
 exports.Logger = Logger;
 exports.logger = new Logger();
 exports.default = exports.logger;
-if (process.env.NODE_ENV === "production" && typeof window !== "undefined") {
+if (env_1.ENV.NODE_ENV === "production" && typeof window !== "undefined") {
     const oldConsole = window.console;
     window.console = {
         log: (...args) => {

@@ -4,24 +4,23 @@ exports.client = exports.HttpClient = void 0;
 const logger_1 = require("../logger");
 const env_1 = require("../env");
 class HttpClient {
-    static instance;
     defaultUrl;
     defaultHeaders;
     constructor() {
         this.defaultUrl = env_1.ENV.NEXT_PUBLIC_NC_API_URL;
         this.defaultHeaders = {
-            'Authorization': `Bearer ${env_1.ENV.NC_API_TOKEN}`,
+            'Authorization': `Bearer ${env_1.ENV.NEXT_PUBLIC_NC_API_TOKEN}`,
             'Content-Type': 'application/json'
         };
     }
-    static getInstance() {
-        if (!HttpClient.instance) {
-            HttpClient.instance = new HttpClient();
-        }
-        return HttpClient.instance;
-    }
     setBaseUrl(url) {
         this.defaultUrl = url;
+    }
+    setAuthorization(token) {
+        this.defaultHeaders = {
+            ...this.defaultHeaders,
+            "Authorization": `Bearer ${token}`,
+        };
     }
     setHeaders(headers) {
         this.defaultHeaders = {
@@ -70,5 +69,5 @@ class HttpClient {
     }
 }
 exports.HttpClient = HttpClient;
-exports.client = HttpClient.getInstance();
+exports.client = new HttpClient();
 exports.default = exports.client;

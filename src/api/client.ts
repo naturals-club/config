@@ -1,5 +1,5 @@
 import { logger } from '../logger';
-import { ENV } from "../env";
+import { ENV } from '../env';
 
 export interface RequestConfig {
   method?: string;
@@ -8,27 +8,26 @@ export interface RequestConfig {
 }
 
 export class HttpClient {
-  private static instance: HttpClient;
   private defaultUrl: string;
   private defaultHeaders: HeadersInit;
 
-  private constructor() {
+  constructor() {
     this.defaultUrl = ENV.NEXT_PUBLIC_NC_API_URL;
     this.defaultHeaders = {
-      'Authorization': `Bearer ${ENV.NC_API_TOKEN}`,
+      'Authorization': `Bearer ${ENV.NEXT_PUBLIC_NC_API_TOKEN}`,
       'Content-Type': 'application/json'
     };
   }
 
-  public static getInstance(): HttpClient {
-    if (!HttpClient.instance) {
-      HttpClient.instance = new HttpClient();
-    }
-    return HttpClient.instance;
-  }
-
   setBaseUrl(url: string) {
     this.defaultUrl = url;
+  }
+
+  setAuthorization(token: string) {
+    this.defaultHeaders = {
+      ...this.defaultHeaders,
+      "Authorization": `Bearer ${token}`,
+    }
   }
 
   setHeaders(headers: Record<string, any>) {
@@ -86,5 +85,5 @@ export class HttpClient {
   }
 }
 
-export const client = HttpClient.getInstance();
+export const client = new HttpClient();
 export default client;

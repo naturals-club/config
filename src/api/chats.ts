@@ -1,4 +1,4 @@
-import client from "./client";
+import { client } from "./client";
 
 export interface CreateChatParams {
   refer_id: string; // <WA_ID>
