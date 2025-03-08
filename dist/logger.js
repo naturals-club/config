@@ -1,30 +1,62 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logger = void 0;
-const winston_1 = __importDefault(require("winston"));
-const env_1 = __importDefault(require("./env"));
-const [host, port = 80] = env_1.default.NC_SENTINEL_API_URL.split("://").pop().split(":");
-const PROJECT_NAME = env_1.default.NC_PROJECT_NAME || "naturals-club-core";
-exports.logger = winston_1.default.createLogger({
-    level: "info",
-    format: winston_1.default.format.combine(winston_1.default.format.timestamp(), winston_1.default.format.json()),
-    defaultMeta: { project: PROJECT_NAME },
-    transports: [
-        new winston_1.default.transports.Http({
-            host: host,
-            port: Number(port),
-            format: winston_1.default.format.json(),
-        }),
-        new winston_1.default.transports.Console(),
-    ],
-});
+exports.logger = exports.Logger = void 0;
+const env_1 = require("./env");
+class Logger {
+    level;
+    defaultMeta;
+    constructor(defaultMeta = {}) {
+        this.level = "info";
+        this.defaultMeta = { ...defaultMeta, project: env_1.ENV.NEXT_PUBLIC_APP_NAME };
+    }
+    print(level, message, meta = {}) {
+        const timestamp = new Date().toISOString();
+        const log = {
+            timestamp,
+            level,
+            message,
+            ...meta,
+        };
+        if (typeof window !== "undefined" && window.console) {
+            if (level === "info") {
+                console.log(JSON.stringify(log));
+            }
+            else if (level === "info") {
+                console.info(JSON.stringify(log));
+            }
+            else if (level === "warn") {
+                console.warn(JSON.stringify(log));
+            }
+            else if (level === "error") {
+                console.error(JSON.stringify(log));
+            }
+            else if (level === "debug") {
+                console.debug(JSON.stringify(log));
+            }
+        }
+    }
+    log(message, meta) {
+        this.print("log", message, meta);
+    }
+    info(message, meta) {
+        this.print("info", message, meta);
+    }
+    warn(message, meta) {
+        this.print("warn", message, meta);
+    }
+    error(message, meta) {
+        this.print("error", message, meta);
+    }
+    debug(message, meta) {
+        this.print("debug", message, meta);
+    }
+}
+exports.Logger = Logger;
+exports.logger = new Logger();
 exports.default = exports.logger;
-if (process.env.NODE_ENV === "production") {
-    const oldConsole = global.console;
-    global.console = {
+if (process.env.NODE_ENV === "production" && typeof window !== "undefined") {
+    const oldConsole = window.console;
+    window.console = {
         log: (...args) => {
             exports.logger.info(args.map(String).join(" "));
             oldConsole.log(...args);

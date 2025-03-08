@@ -1,4 +1,5 @@
-import logger from '../logger';
+import { logger } from '../logger';
+import { ENV } from "../env";
 
 export interface RequestConfig {
   method?: string;
@@ -7,12 +8,34 @@ export interface RequestConfig {
 }
 
 export class HttpClient {
+  private static instance: HttpClient;
   private defaultUrl: string;
   private defaultHeaders: HeadersInit;
 
-  constructor(baseUrl: string, headers: HeadersInit = {}) {
-    this.defaultUrl = baseUrl;
-    this.defaultHeaders = headers;
+  private constructor() {
+    this.defaultUrl = ENV.NEXT_PUBLIC_NC_API_URL;
+    this.defaultHeaders = {
+      'Authorization': `Bearer ${ENV.NC_API_TOKEN}`,
+      'Content-Type': 'application/json'
+    };
+  }
+
+  public static getInstance(): HttpClient {
+    if (!HttpClient.instance) {
+      HttpClient.instance = new HttpClient();
+    }
+    return HttpClient.instance;
+  }
+
+  setBaseUrl(url: string) {
+    this.defaultUrl = url;
+  }
+
+  setHeaders(headers: Record<string, any>) {
+    this.defaultHeaders = {
+      ...this.defaultHeaders,
+      ...headers
+    }
   }
 
   async get<T>(url: string, config: RequestConfig = {}): Promise<T> {
@@ -41,7 +64,6 @@ export class HttpClient {
         body = config.body;
       } else {
         body = JSON.stringify(config.body);
-        (headers as any)['Content-Type'] = 'application/json';
       }
     }
 
@@ -56,7 +78,7 @@ export class HttpClient {
       }
 
       logger.info(`Response from ${method}: ${fullUrl}`, data);
-      return data.data.data;
+      return data;
     } catch (error) {
       logger.error(`Request failed for ${method} ${fullUrl}`, { error });
       throw error;
@@ -64,4 +86,5 @@ export class HttpClient {
   }
 }
 
-export default HttpClient;
+export const client = HttpClient.getInstance();
+export default client;
