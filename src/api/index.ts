@@ -7,16 +7,14 @@ export const api = {
   documentTypes: new CRUD("document-types"),
   countries: new CRUD("countries"),
   students: new CRUD("students"),
-  contacts: Object.assign(new CRUD("contacts"), function (userId: string) {
-    return {
-      forms: {
-        create: (data: any) => client.post(`/contacts/${userId}/forms`, data),
-      },
-      orders: {
-        create: (data: any) => client.post(`/contacts/${userId}/orders`, data),
-        get: (orderId: any) => client.get(`/contacts/${userId}/orders/${orderId}`),
-      }
-    }
+  contacts: Object.assign(new CRUD("contacts"), {
+    forms: (userId: string) => ({
+      create: (data: any) => client.post(`/contacts/${userId}/forms`, data),
+    }),
+    orders: (userId: string) => ({
+      create: (data: any) => client.post(`/contacts/${userId}/orders`, data),
+      get: (orderId: any) => client.get(`/contacts/${userId}/orders/${orderId}`),
+    }),
   }),
   states: new CRUD("states"),
   users: new CRUD("users"),
@@ -29,5 +27,3 @@ export const api = {
     }
   }
 }
-
-console.log(api.contacts)
