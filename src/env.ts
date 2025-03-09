@@ -6,9 +6,6 @@ const envSchema = z.object({
   NC_WHATSAPP_API_URL: z.string().url(),
   NC_WHATSAPP_API_TOKEN: z.string().min(1),
 
-  NC_AI_API_URL: z.string().url(),
-  NC_AI_API_TOKEN: z.string().min(1),
-
   NEXT_PUBLIC_NC_API_URL: z.string().url(),
   NEXT_PUBLIC_NC_API_TOKEN: z.string().min(1),
 
@@ -30,9 +27,6 @@ export const ENV = {
 
   NC_WHATSAPP_API_URL: process.env.NC_WHATSAPP_API_URL,
   NC_WHATSAPP_API_TOKEN: process.env.NC_WHATSAPP_API_TOKEN,
-
-  NC_AI_API_URL: process.env.NC_AI_API_URL,
-  NC_AI_API_TOKEN: process.env.NC_AI_API_TOKEN,
 
   NEXT_PUBLIC_NC_API_URL: process.env.NEXT_PUBLIC_NC_API_URL,
   NEXT_PUBLIC_NC_API_TOKEN: process.env.NEXT_PUBLIC_NC_API_TOKEN,
