@@ -9,7 +9,12 @@ exports.api = {
     documentTypes: new crud_1.CRUD("document-types"),
     countries: new crud_1.CRUD("countries"),
     students: new crud_1.CRUD("students"),
-    contacts: new crud_1.CRUD("contacts"),
+    contacts: Object.assign(new crud_1.CRUD("contacts"), {
+        orders: {
+            create: (userId, data) => client_1.client.post(`/contacts/${userId}/orders`, data),
+            get: (userId, orderId) => client_1.client.get(`/contacts/${userId}/orders/${orderId}`),
+        }
+    }),
     states: new crud_1.CRUD("states"),
     users: new crud_1.CRUD("users"),
     plans: new crud_1.CRUD("plans"),

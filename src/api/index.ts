@@ -7,7 +7,12 @@ export const api = {
   documentTypes: new CRUD("document-types"),
   countries: new CRUD("countries"),
   students: new CRUD("students"),
-  contacts: new CRUD("contacts"),
+  contacts: Object.assign(new CRUD("contacts"), {
+    orders: {
+      create: (userId: string, data: any) => client.post(`/contacts/${userId}/orders`, data),
+      get: (userId: string, orderId: any) => client.get(`/contacts/${userId}/orders/${orderId}`),
+    }
+  }),
   states: new CRUD("states"),
   users: new CRUD("users"),
   plans: new CRUD("plans"),
