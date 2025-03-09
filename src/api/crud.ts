@@ -58,4 +58,13 @@ export class CRUD {
       throw error;
     }
   }
+
+  static merge(key: string, obj: Record<string, any>) {
+    const instance = new CRUD(key);
+
+    for (const key in obj)
+      instance[key] = obj[key];
+
+    return instance;
+  }
 }

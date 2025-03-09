@@ -9,7 +9,7 @@ exports.api = {
     documentTypes: new crud_1.CRUD("document-types"),
     countries: new crud_1.CRUD("countries"),
     students: new crud_1.CRUD("students"),
-    contacts: Object.assign(new crud_1.CRUD("contacts"), {
+    contacts: crud_1.CRUD.merge("contacts", {
         forms: (userId) => ({
             create: (data) => client_1.client.post(`/contacts/${userId}/forms`, data),
         }),

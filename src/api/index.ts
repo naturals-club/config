@@ -7,7 +7,7 @@ export const api = {
   documentTypes: new CRUD("document-types"),
   countries: new CRUD("countries"),
   students: new CRUD("students"),
-  contacts: Object.assign(new CRUD("contacts"), {
+  contacts: CRUD.merge("contacts", {
     forms: (userId: string) => ({
       create: (data: any) => client.post(`/contacts/${userId}/forms`, data),
     }),

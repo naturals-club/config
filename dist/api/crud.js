@@ -59,5 +59,11 @@ class CRUD {
             throw error;
         }
     }
+    static merge(key, obj) {
+        const instance = new CRUD(key);
+        for (const key in obj)
+            instance[key] = obj[key];
+        return instance;
+    }
 }
 exports.CRUD = CRUD;
