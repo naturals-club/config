@@ -9,19 +9,21 @@ exports.api = {
     documentTypes: new crud_1.CRUD("document-types"),
     countries: new crud_1.CRUD("countries"),
     students: new crud_1.CRUD("students"),
+    consults: new crud_1.CRUD("consults"),
+    states: new crud_1.CRUD("states"),
+    users: new crud_1.CRUD("users"),
+    plans: new crud_1.CRUD("plans"),
+    chats: chats_1.Chat,
     contacts: crud_1.CRUD.merge("contacts", {
         forms: (userId) => ({
             create: (data) => client_1.client.post(`/contacts/${userId}/forms`, data),
+            get: (formId) => client_1.client.get(`/contacts/${userId}/forms/${formId}`),
         }),
         orders: (userId) => ({
             create: (data) => client_1.client.post(`/contacts/${userId}/orders`, data),
             get: (orderId) => client_1.client.get(`/contacts/${userId}/orders/${orderId}`),
         }),
     }),
-    states: new crud_1.CRUD("states"),
-    users: new crud_1.CRUD("users"),
-    plans: new crud_1.CRUD("plans"),
-    chats: chats_1.Chat,
     setup: {
         setAuthorization: (token) => {
             client_1.client.setHeaders({ Authorization: `Bearer ${token}` });
