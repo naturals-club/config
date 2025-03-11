@@ -3,8 +3,8 @@ import { z } from "zod";
 const envSchema = z.object({
   NODE_ENV: z.string().default("development"),
 
-  NC_WHATSAPP_API_URL: z.string().url(),
-  NC_WHATSAPP_API_TOKEN: z.string().min(1),
+  NC_COMMUNICATION_API_URL: z.string().url(),
+  NC_COMMUNICATION_API_TOKEN: z.string().min(1),
 
   NEXT_PUBLIC_NC_API_URL: z.string().url(),
   NEXT_PUBLIC_NC_API_TOKEN: z.string().min(1),
@@ -25,8 +25,8 @@ export type EnvType = z.infer<typeof envSchema>;
 export const ENV = {
   NODE_ENV: process.env.NODE_ENV,
 
-  NC_WHATSAPP_API_URL: process.env.NC_WHATSAPP_API_URL,
-  NC_WHATSAPP_API_TOKEN: process.env.NC_WHATSAPP_API_TOKEN,
+  NC_COMMUNICATION_API_URL: process.env.NC_COMMUNICATION_API_URL,
+  NC_COMMUNICATION_API_TOKEN: process.env.NC_COMMUNICATION_API_TOKEN,
 
   NEXT_PUBLIC_NC_API_URL: process.env.NEXT_PUBLIC_NC_API_URL,
   NEXT_PUBLIC_NC_API_TOKEN: process.env.NEXT_PUBLIC_NC_API_TOKEN,

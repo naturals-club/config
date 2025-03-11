@@ -11,6 +11,9 @@ export const api = {
   states: new CRUD("states"),
   users: new CRUD("users"),
   plans: new CRUD("plans"),
+  tasks: (userId: string | number) => {
+    return new CRUD(`contacts/tasks/${userId}/tasks`);
+  },
   chats: Chat,
   contacts: CRUD.merge("contacts", {
     forms: (userId: string | number) => ({

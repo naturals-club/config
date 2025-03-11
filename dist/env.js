@@ -4,8 +4,8 @@ exports.ENV = void 0;
 const zod_1 = require("zod");
 const envSchema = zod_1.z.object({
     NODE_ENV: zod_1.z.string().default("development"),
-    NC_WHATSAPP_API_URL: zod_1.z.string().url(),
-    NC_WHATSAPP_API_TOKEN: zod_1.z.string().min(1),
+    NC_COMMUNICATION_API_URL: zod_1.z.string().url(),
+    NC_COMMUNICATION_API_TOKEN: zod_1.z.string().min(1),
     NEXT_PUBLIC_NC_API_URL: zod_1.z.string().url(),
     NEXT_PUBLIC_NC_API_TOKEN: zod_1.z.string().min(1),
     NC_SENTINEL_API_URL: zod_1.z.string().url(),
@@ -19,8 +19,8 @@ const envSchema = zod_1.z.object({
 const parsed = envSchema.safeParse(process.env);
 exports.ENV = {
     NODE_ENV: process.env.NODE_ENV,
-    NC_WHATSAPP_API_URL: process.env.NC_WHATSAPP_API_URL,
-    NC_WHATSAPP_API_TOKEN: process.env.NC_WHATSAPP_API_TOKEN,
+    NC_COMMUNICATION_API_URL: process.env.NC_COMMUNICATION_API_URL,
+    NC_COMMUNICATION_API_TOKEN: process.env.NC_COMMUNICATION_API_TOKEN,
     NEXT_PUBLIC_NC_API_URL: process.env.NEXT_PUBLIC_NC_API_URL,
     NEXT_PUBLIC_NC_API_TOKEN: process.env.NEXT_PUBLIC_NC_API_TOKEN,
     NC_SENTINEL_API_URL: process.env.NC_SENTINEL_API_URL,

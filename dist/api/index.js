@@ -13,6 +13,9 @@ exports.api = {
     states: new crud_1.CRUD("states"),
     users: new crud_1.CRUD("users"),
     plans: new crud_1.CRUD("plans"),
+    tasks: (userId) => {
+        return new crud_1.CRUD(`contacts/tasks/${userId}/tasks`);
+    },
     chats: chats_1.Chat,
     contacts: crud_1.CRUD.merge("contacts", {
         forms: (userId) => ({
