@@ -8,7 +8,15 @@ const openai_1 = __importDefault(require("openai"));
 exports.client = new openai_1.default({ apiKey: process.env.OPENAI_API_KEY });
 exports.openai = {
     audio: exports.client.audio,
-    clear: (string) => JSON.parse(string.split("```json")[1].split("```")[0]),
+    clear: (string) => {
+        try {
+            return JSON.parse(string.split("```json")[1].split("```")[0]);
+        }
+        catch (error) {
+            console.log(error);
+            return string;
+        }
+    },
     completion: {
         send: async (prompt, model = "gpt-4o-mini") => {
             const SETUP = `Você é um especialista em Educação Física, Saúde, Esportes e Nutrição Esportiva que trabalha para Naturals Club.`;

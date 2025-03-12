@@ -6,7 +6,14 @@ export const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export const openai = {
   audio: client.audio,
-  clear: (string: string) => JSON.parse(string.split("```json")[1].split("```")[0]),
+  clear: (string: string) => {
+    try {
+      return JSON.parse(string.split("```json")[1].split("```")[0]);
+    } catch (error) {
+      console.log(error);
+      return string;
+    }
+  },
   completion: {
     send: async (prompt: ChatCompletionUserMessageParam["content"], model = "gpt-4o-mini") => {
       const SETUP = `Você é um especialista em Educação Física, Saúde, Esportes e Nutrição Esportiva que trabalha para Naturals Club.`;
