@@ -33,14 +33,7 @@ OPENAI_API_KEY=your-openai-api-key
 OPENAI_VECTOR_STORE=your-openai-vector-store
 ```
 
-## Whatsapp
-
-The API for interacting with our internal WhatsApp API. The configurations and credentials are defined via environment variables.
-
-### Usage Example
-
-- Ensure the necessary environment variables are set up.
-- Use the API to send messages, check statuses, or retrieve conversations.
+-------------
 
 ## Logger
 
@@ -59,6 +52,8 @@ No additional setup is required; just import the configuration at the start of y
 ```js
 import "@naturals/logger";
 ```
+
+-------------
 
 ## API
 
@@ -98,6 +93,8 @@ await api.user.delete(1);
 - **get(id: number)**: Fetches a specific item by its ID.
 - **edit(id: number, data: any)**: Edits a specific item by its ID with the provided data.
 - **delete(id: number)**: Deletes a specific item by its ID.
+
+---------------
 
 ## AI
 
@@ -141,6 +138,154 @@ const response = await openai.thread.send({
 });
 console.log("AI Response:", response);
 ```
+
+----------------
+
+## Communications Service
+
+A biblioteca **@naturals/config** inclui um serviço de comunicação que oferece funcionalidades para interagir com APIs de mensagens como WhatsApp, E-mail, e Slack. As funções são configuradas automaticamente utilizando variáveis de ambiente, com as configurações de URL e token.
+
+### WhatsApp
+
+O serviço do WhatsApp permite enviar mensagens, obter informações sobre conversas e interagir com a API interna do WhatsApp.
+
+#### Funcionalidades
+
+- **Enviar mensagem**: Envia uma mensagem para uma conversa específica do WhatsApp.
+- **Listar conversas**: Recupera todas as conversas existentes.
+- **Obter detalhes da conversa**: Obtém detalhes sobre uma conversa específica.
+
+#### Exemplos de uso:
+
+1. **Enviar mensagem no WhatsApp**:
+
+```ts
+import { communication } from "@naturals/config";
+
+const response = await communication.whatsapp.message.send({
+  conversationSid: "your-conversation-sid",
+  message: "Olá, como posso ajudar?"
+});
+console.log(response);
+```
+
+2. **Listar conversas do WhatsApp**:
+
+```ts
+const conversations = await communication.whatsapp.conversations.list();
+console.log(conversations);
+```
+
+3. **Obter detalhes de uma conversa**:
+
+```ts
+const conversation = await communication.whatsapp.conversations.get("your-conversation-sid");
+console.log(conversation);
+```
+
+### E-mail
+
+O serviço de e-mail permite enviar e-mails personalizados utilizando templates ou conteúdo HTML.
+
+#### Funcionalidades
+
+- **Enviar e-mail**: Envia um e-mail para um destinatário com conteúdo personalizado ou utilizando templates.
+
+#### Exemplos de uso:
+
+1. **Enviar e-mail simples**:
+
+```ts
+const response = await communication.email.send({
+  recipient: "user@example.com",
+  subject: "Bem-vindo à Naturals Club!",
+  content: "Aqui está o seu conteúdo...",
+  html: "<h1>Bem-vindo!</h1>"
+});
+console.log(response);
+```
+
+2. **Enviar e-mail com template**:
+
+```ts
+const response = await communication.email.send({
+  recipient: "user@example.com",
+  template: "welcome",
+  variables: {
+    name: "Lucas",
+    cta: "https://link.com?custom=true"
+  }
+});
+console.log(response);
+```
+
+### Mensagens em Massa
+
+O serviço de mensagens em massa permite enviar notificações em massa para múltiplos destinatários com um único envio, personalizando o conteúdo e o assunto.
+
+#### Funcionalidades
+
+- **Enviar mensagens em massa**: Envia mensagens personalizadas para múltiplos destinatários.
+
+#### Exemplos de uso:
+
+1. **Enviar mensagem em massa**:
+
+```ts
+const response = await communication.broadcast.send({
+  recipient: "user@example.com",
+  phone: "+551199999999",
+  subject: "Promoção Exclusiva",
+  template: "promotion",
+  variables: {
+    discount: "20%"
+  }
+});
+console.log(response);
+```
+
+### Status da API
+
+Permite verificar o status da API de comunicação para garantir que está operacional.
+
+#### Exemplos de uso:
+
+1. **Verificar status da API**:
+
+```ts
+const status = await communication.status.check();
+console.log(status);
+```
+
+### Slack
+
+O serviço de Slack permite enviar mensagens para canais específicos do Slack e listar canais disponíveis.
+
+#### Funcionalidades
+
+- **Enviar mensagem no Slack**: Envia uma mensagem para um canal do Slack.
+- **Listar canais do Slack**: Obtém todos os canais disponíveis no workspace do Slack.
+
+#### Exemplos de uso:
+
+1. **Enviar mensagem no Slack**:
+
+```ts
+const response = await communication.slack.message.send({
+  channel: "general",
+  text: "Olá, equipe! Vamos começar a reunião?"
+});
+console.log(response);
+```
+
+2. **Listar canais do Slack**:
+
+```ts
+const channels = await communication.slack.channels.list();
+console.log(channels);
+```
+
+-------------
 
 ## Technologies
 
