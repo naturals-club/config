@@ -14,11 +14,11 @@ export const api = {
   chats: Chat,
   contacts: CRUD.merge("contacts", {
     forms: (contactId: string | number) => ({
-      create: (data: any) => client.post(`contacts/forms`, {...data, contact: contactId}),
+      create: (data: any) => client.post(`/contacts/forms`, { ...data, contact: contactId }),
       get: (formId: string | number) => client.get(`/contacts/forms/${formId}`),
     }),
     orders: (contactId: string) => ({
-      create: (data: any) => client.post(`contacts/orders`, {...data, contact: contactId}),
+      create: (data: any) => client.post(`/contacts/orders`, { ...data, contact: contactId }),
       get: (orderId: string | number) => client.get(`/contacts/orders/${orderId}`),
     }),
     tasks: new CRUD(`contacts/tasks`)
