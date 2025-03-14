@@ -11,19 +11,17 @@ export const api = {
   states: new CRUD("states"),
   users: new CRUD("users"),
   plans: new CRUD("plans"),
-  tasks: (userId: string | number) => {
-    return new CRUD(`contacts/tasks/${userId}/tasks`);
-  },
   chats: Chat,
   contacts: CRUD.merge("contacts", {
-    forms: (userId: string | number) => ({
-      create: (data: any) => client.post(`/contacts/${userId}/forms`, data),
-      get: (formId: string | number) => client.get(`/contacts/${userId}/forms/${formId}`),
+    forms: (contactId: string | number) => ({
+      create: (data: any) => client.post(`contacts/forms`, {...data, contact: contactId}),
+      get: (formId: string | number) => client.get(`/contacts/forms/${formId}`),
     }),
-    orders: (userId: string) => ({
-      create: (data: any) => client.post(`/contacts/${userId}/orders`, data),
-      get: (orderId: string | number) => client.get(`/contacts/${userId}/orders/${orderId}`),
+    orders: (contactId: string) => ({
+      create: (data: any) => client.post(`contacts/orders`, {...data, contact: contactId}),
+      get: (orderId: string | number) => client.get(`/contacts/orders/${orderId}`),
     }),
+    tasks: new CRUD(`contacts/tasks`)
   }),
   setup: {
     setAuthorization: (token: string) => {

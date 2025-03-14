@@ -13,19 +13,17 @@ exports.api = {
     states: new crud_1.CRUD("states"),
     users: new crud_1.CRUD("users"),
     plans: new crud_1.CRUD("plans"),
-    tasks: (userId) => {
-        return new crud_1.CRUD(`contacts/tasks/${userId}/tasks`);
-    },
     chats: chats_1.Chat,
     contacts: crud_1.CRUD.merge("contacts", {
-        forms: (userId) => ({
-            create: (data) => client_1.client.post(`/contacts/${userId}/forms`, data),
-            get: (formId) => client_1.client.get(`/contacts/${userId}/forms/${formId}`),
+        forms: (contactId) => ({
+            create: (data) => client_1.client.post(`contacts/forms`, { ...data, contact: contactId }),
+            get: (formId) => client_1.client.get(`/contacts/forms/${formId}`),
         }),
-        orders: (userId) => ({
-            create: (data) => client_1.client.post(`/contacts/${userId}/orders`, data),
-            get: (orderId) => client_1.client.get(`/contacts/${userId}/orders/${orderId}`),
+        orders: (contactId) => ({
+            create: (data) => client_1.client.post(`contacts/orders`, { ...data, contact: contactId }),
+            get: (orderId) => client_1.client.get(`/contacts/orders/${orderId}`),
         }),
+        tasks: new crud_1.CRUD(`contacts/tasks`)
     }),
     setup: {
         setAuthorization: (token) => {
