@@ -13,9 +13,15 @@ exports.openai = {
             return JSON.parse(string.split("```json")[1].split("```")[0]);
         }
         catch (error) {
-            console.log(error);
-            return string;
+            console.log("Error parsing as Markdown", error);
         }
+        try {
+            return JSON.parse(string);
+        }
+        catch (error) {
+            console.log("Error parsing as JSON", error);
+        }
+        return string;
     },
     completion: {
         send: async (prompt, model = "gpt-4o-mini") => {
