@@ -8,6 +8,7 @@ export const api = {
   countries: new CRUD("countries"),
   exercises: new CRUD("exercises"),
   students: new CRUD("students"),
+  routines: new CRUD("routines"),
   consults: new CRUD("consults"),
   workouts: new CRUD("workouts"),
   states: new CRUD("states"),

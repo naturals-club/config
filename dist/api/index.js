@@ -10,6 +10,7 @@ exports.api = {
     countries: new crud_1.CRUD("countries"),
     exercises: new crud_1.CRUD("exercises"),
     students: new crud_1.CRUD("students"),
+    routines: new crud_1.CRUD("routines"),
     consults: new crud_1.CRUD("consults"),
     workouts: new crud_1.CRUD("workouts"),
     states: new crud_1.CRUD("states"),
