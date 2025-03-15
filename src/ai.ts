@@ -5,6 +5,8 @@ import OpenAI from "openai";
 export const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export const openai = {
+  client: client,
+  files: client.files,
   audio: client.audio,
   clear: (string: string) => {
     try {

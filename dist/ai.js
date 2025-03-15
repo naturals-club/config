@@ -7,6 +7,8 @@ exports.openai = exports.client = void 0;
 const openai_1 = __importDefault(require("openai"));
 exports.client = new openai_1.default({ apiKey: process.env.OPENAI_API_KEY });
 exports.openai = {
+    client: exports.client,
+    files: exports.client.files,
     audio: exports.client.audio,
     clear: (string) => {
         try {
