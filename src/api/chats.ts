@@ -1,5 +1,4 @@
 import { client } from "./client";
-import { openai } from "../ai";
 
 export interface CreateChatParams {
   refer_id: string; // <WA_ID>
@@ -18,7 +17,21 @@ export const Chat = {
     if (!!chat && !!chat.id) return chat;
 
     console.log(`==== [${id}] Creating OpenAI thread`);
-    const threadId = await openai.thread.create(id);
+    const { id: threadId } = await fetch("https://api.openai.com/v1/threads", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        metadata: { userId: id },
+        tool_resources: {
+          file_search: {
+            vector_store_ids: [process.env.OPENAI_VECTOR_STORE as string],
+          }
+        }
+      })
+    }).then(res => res.json());
 
     console.log(`==== [${id}] Creating contact on Naturals`);
     const { data } = await client.post(`/chats`, {

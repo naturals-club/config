@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Chat = void 0;
 const client_1 = require("./client");
-const ai_1 = require("../ai");
 exports.Chat = {
     status: () => client_1.client.get("/chats/instance/status"),
     qrcode: () => client_1.client.get("/chats/instance/qr-code"),
@@ -12,7 +11,21 @@ exports.Chat = {
         if (!!chat && !!chat.id)
             return chat;
         console.log(`==== [${id}] Creating OpenAI thread`);
-        const threadId = await ai_1.openai.thread.create(id);
+        const { id: threadId } = await fetch("https://api.openai.com/v1/threads", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                metadata: { userId: id },
+                tool_resources: {
+                    file_search: {
+                        vector_store_ids: [process.env.OPENAI_VECTOR_STORE],
+                    }
+                }
+            })
+        }).then(res => res.json());
         console.log(`==== [${id}] Creating contact on Naturals`);
         const { data } = await client_1.client.post(`/chats`, {
             ai_enabled: true,
