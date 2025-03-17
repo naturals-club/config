@@ -32,5 +32,13 @@ export const api = {
     setAuthorization: (token: string) => {
       client.setHeaders({ Authorization: `Bearer ${token}` });
     }
+  },
+  auth: {
+    signin: (data: any) => client.post("/auth", data),
+    refresh: (refreshToken) => client.put("/auth", {}, { headers: { Authorization: `Bearer ${refreshToken}` } }),
+    password: {
+      forgot: (data: any) => client.post("/auth/forgot-password", data),
+      reset: (data: any) => client.post("/auth/reset-password", data),
+    }
   }
 }

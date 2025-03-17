@@ -34,5 +34,13 @@ exports.api = {
         setAuthorization: (token) => {
             client_1.client.setHeaders({ Authorization: `Bearer ${token}` });
         }
+    },
+    auth: {
+        signin: (data) => client_1.client.post("/auth", data),
+        refresh: (refreshToken) => client_1.client.put("/auth", {}, { headers: { Authorization: `Bearer ${refreshToken}` } }),
+        password: {
+            forgot: (data) => client_1.client.post("/auth/forgot-password", data),
+            reset: (data) => client_1.client.post("/auth/reset-password", data),
+        }
     }
 };
