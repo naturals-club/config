@@ -36,6 +36,7 @@ exports.api = {
         }
     },
     auth: {
+        me: () => client_1.client.get("/user"),
         signin: (data) => client_1.client.post("/auth", data),
         refresh: (refreshToken) => client_1.client.put("/auth", {}, { headers: { Authorization: `Bearer ${refreshToken}` } }),
         password: {
