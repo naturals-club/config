@@ -29,6 +29,8 @@ export const api = {
     tasks: new CRUD(`contacts/tasks`)
   }),
   setup: {
+    setBaseUrl: client.setBaseUrl,
+    setHeaders: client.setHeaders,
     setAuthorization: (token: string) => {
       client.setHeaders({ Authorization: `Bearer ${token}` });
     }

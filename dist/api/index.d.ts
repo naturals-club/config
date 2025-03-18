@@ -33,6 +33,8 @@ export declare const api: {
     };
     contacts: CRUD;
     setup: {
+        setBaseUrl: (url: string) => void;
+        setHeaders: (headers: Record<string, any>) => void;
         setAuthorization: (token: string) => void;
     };
     auth: {

@@ -31,6 +31,8 @@ exports.api = {
         tasks: new crud_1.CRUD(`contacts/tasks`)
     }),
     setup: {
+        setBaseUrl: client_1.client.setBaseUrl,
+        setHeaders: client_1.client.setHeaders,
         setAuthorization: (token) => {
             client_1.client.setHeaders({ Authorization: `Bearer ${token}` });
         }
