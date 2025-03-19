@@ -6,8 +6,8 @@ const envSchema = z.object({
   NC_COMMUNICATION_API_URL: z.string().url(),
   NC_COMMUNICATION_API_TOKEN: z.string().min(1),
 
-  NEXT_PUBLIC_NC_API_URL: z.string().url(),
-  NEXT_PUBLIC_NC_API_TOKEN: z.string().min(1),
+  NC_API_URL: z.string().url(),
+  NC_API_TOKEN: z.string().min(1),
 
   NC_SENTINEL_API_URL: z.string().url(),
   // NC_SENTINEL_API_TOKEN: z.string().min(1),
@@ -28,8 +28,8 @@ export const ENV = {
   NC_COMMUNICATION_API_URL: process.env.NC_COMMUNICATION_API_URL,
   NC_COMMUNICATION_API_TOKEN: process.env.NC_COMMUNICATION_API_TOKEN,
 
-  NEXT_PUBLIC_NC_API_URL: process.env.NEXT_PUBLIC_NC_API_URL,
-  NEXT_PUBLIC_NC_API_TOKEN: process.env.NEXT_PUBLIC_NC_API_TOKEN,
+  NC_API_URL: process.env.NEXT_PUBLIC_NC_API_URL || process.env.EXPO_PUBLIC_NC_API_URL,
+  NC_API_TOKEN: process.env.NEXT_PUBLIC_NC_API_TOKEN || process.env.EXPO_PUBLIC_NC_API_TOKEN,
 
   NC_SENTINEL_API_URL: process.env.NC_SENTINEL_API_URL,
   // NC_SENTINEL_API_TOKEN: process.env.NC_SENTINEL_API_TOKEN,

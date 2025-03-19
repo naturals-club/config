@@ -4,9 +4,12 @@ export interface RequestConfig {
     body?: any;
 }
 export declare class HttpClient {
+    private static instance;
     private defaultUrl;
     private defaultHeaders;
-    constructor();
+    private constructor();
+    static getInstance(): HttpClient;
+    static cloneInstance(): HttpClient;
     setBaseUrl(url: string): void;
     setAuthorization(token: string): void;
     setHeaders(headers: Record<string, any>): void;

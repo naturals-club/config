@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.communication = void 0;
 const client_1 = require("../api/client");
 const env_1 = __importDefault(require("../env"));
-const client = new client_1.HttpClient();
+const client = client_1.HttpClient.cloneInstance();
 client.setBaseUrl(env_1.default.NC_COMMUNICATION_API_URL);
 client.setAuthorization(env_1.default.NC_COMMUNICATION_API_TOKEN);
 exports.communication = {

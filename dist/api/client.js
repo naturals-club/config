@@ -4,14 +4,24 @@ exports.client = exports.HttpClient = void 0;
 const logger_1 = require("../logger");
 const env_1 = require("../env");
 class HttpClient {
+    static instance;
     defaultUrl;
     defaultHeaders;
     constructor() {
-        this.defaultUrl = env_1.ENV.NEXT_PUBLIC_NC_API_URL;
+        this.defaultUrl = env_1.ENV.NC_API_URL;
         this.defaultHeaders = {
-            'Authorization': `Bearer ${env_1.ENV.NEXT_PUBLIC_NC_API_TOKEN}`,
+            'Authorization': `Bearer ${env_1.ENV.NC_API_TOKEN}`,
             'Content-Type': 'application/json'
         };
+    }
+    static getInstance() {
+        if (!HttpClient.instance) {
+            HttpClient.instance = new HttpClient();
+        }
+        return HttpClient.instance;
+    }
+    static cloneInstance() {
+        return new HttpClient();
     }
     setBaseUrl(url) {
         this.defaultUrl = url;
@@ -45,12 +55,7 @@ class HttpClient {
         const headers = { ...this.defaultHeaders, ...config.headers };
         let body = null;
         if (config.body) {
-            if (config.body instanceof FormData) {
-                body = config.body;
-            }
-            else {
-                body = JSON.stringify(config.body);
-            }
+            body = config.body instanceof FormData ? config.body : JSON.stringify(config.body);
         }
         logger_1.logger.info(`Requesting ${method}: ${fullUrl}`, { headers, body });
         try {
@@ -69,5 +74,5 @@ class HttpClient {
     }
 }
 exports.HttpClient = HttpClient;
-exports.client = new HttpClient();
+exports.client = HttpClient.getInstance();
 exports.default = exports.client;

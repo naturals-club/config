@@ -8,15 +8,27 @@ export interface RequestConfig {
 }
 
 export class HttpClient {
+  private static instance: HttpClient;
   private defaultUrl: string;
   private defaultHeaders: HeadersInit;
 
-  constructor() {
-    this.defaultUrl = ENV.NEXT_PUBLIC_NC_API_URL;
+  private constructor() {
+    this.defaultUrl = ENV.NC_API_URL;
     this.defaultHeaders = {
-      'Authorization': `Bearer ${ENV.NEXT_PUBLIC_NC_API_TOKEN}`,
+      'Authorization': `Bearer ${ENV.NC_API_TOKEN}`,
       'Content-Type': 'application/json'
     };
+  }
+
+  public static getInstance(): HttpClient {
+    if (!HttpClient.instance) {
+      HttpClient.instance = new HttpClient();
+    }
+    return HttpClient.instance;
+  }
+
+  public static cloneInstance(): HttpClient {
+    return new HttpClient();
   }
 
   setBaseUrl(url: string) {
@@ -27,14 +39,14 @@ export class HttpClient {
     this.defaultHeaders = {
       ...this.defaultHeaders,
       "Authorization": `Bearer ${token}`,
-    }
+    };
   }
 
   setHeaders(headers: Record<string, any>) {
     this.defaultHeaders = {
       ...this.defaultHeaders,
       ...headers
-    }
+    };
   }
 
   async get<T>(url: string, config: RequestConfig = {}): Promise<T> {
@@ -59,11 +71,7 @@ export class HttpClient {
     let body: BodyInit | null = null;
 
     if (config.body) {
-      if (config.body instanceof FormData) {
-        body = config.body;
-      } else {
-        body = JSON.stringify(config.body);
-      }
+      body = config.body instanceof FormData ? config.body : JSON.stringify(config.body);
     }
 
     logger.info(`Requesting ${method}: ${fullUrl}`, { headers, body });
@@ -85,5 +93,5 @@ export class HttpClient {
   }
 }
 
-export const client = new HttpClient();
+export const client = HttpClient.getInstance();
 export default client;

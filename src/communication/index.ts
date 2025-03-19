@@ -1,7 +1,7 @@
 import { HttpClient } from '../api/client';
 import ENV from '../env';
 
-const client = new HttpClient();
+const client = HttpClient.cloneInstance();
 client.setBaseUrl(ENV.NC_COMMUNICATION_API_URL);
 client.setAuthorization(ENV.NC_COMMUNICATION_API_TOKEN);
 
