@@ -19,3 +19,4 @@ __exportStar(require("./communication"), exports);
 __exportStar(require("./api/client"), exports);
 __exportStar(require("./api"), exports);
 __exportStar(require("./logger"), exports);
+__exportStar(require("./env"), exports);

@@ -38,4 +38,4 @@ declare const envSchema: z.ZodObject<{
 }>;
 export type EnvType = z.infer<typeof envSchema>;
 export declare const ENV: EnvType;
-export default ENV;
+export {};

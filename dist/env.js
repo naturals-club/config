@@ -31,7 +31,6 @@ exports.ENV = {
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     OPENAI_VECTOR_STORE: process.env.OPENAI_VECTOR_STORE,
 };
-exports.default = exports.ENV;
 if (typeof window === "undefined" && !parsed.success) {
     console.error("Erro na validação das variáveis de ambiente:");
     parsed.error.errors.forEach((err) => {
