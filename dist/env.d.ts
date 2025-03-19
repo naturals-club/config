@@ -3,8 +3,8 @@ declare const envSchema: z.ZodObject<{
     NODE_ENV: z.ZodDefault<z.ZodString>;
     NC_COMMUNICATION_API_URL: z.ZodString;
     NC_COMMUNICATION_API_TOKEN: z.ZodString;
-    NC_API_URL: z.ZodString;
-    NC_API_TOKEN: z.ZodString;
+    NEXT_PUBLIC_NC_API_URL: z.ZodString;
+    NEXT_PUBLIC_NC_API_TOKEN: z.ZodString;
     NC_SENTINEL_API_URL: z.ZodString;
     NEXT_PUBLIC_APP_NAME: z.ZodString;
     OPENAI_MODEL_PLANNER: z.ZodString;
@@ -15,8 +15,8 @@ declare const envSchema: z.ZodObject<{
     NODE_ENV?: string;
     NC_COMMUNICATION_API_URL?: string;
     NC_COMMUNICATION_API_TOKEN?: string;
-    NC_API_URL?: string;
-    NC_API_TOKEN?: string;
+    NEXT_PUBLIC_NC_API_URL?: string;
+    NEXT_PUBLIC_NC_API_TOKEN?: string;
     NC_SENTINEL_API_URL?: string;
     NEXT_PUBLIC_APP_NAME?: string;
     OPENAI_MODEL_PLANNER?: string;
@@ -27,8 +27,8 @@ declare const envSchema: z.ZodObject<{
     NODE_ENV?: string;
     NC_COMMUNICATION_API_URL?: string;
     NC_COMMUNICATION_API_TOKEN?: string;
-    NC_API_URL?: string;
-    NC_API_TOKEN?: string;
+    NEXT_PUBLIC_NC_API_URL?: string;
+    NEXT_PUBLIC_NC_API_TOKEN?: string;
     NC_SENTINEL_API_URL?: string;
     NEXT_PUBLIC_APP_NAME?: string;
     OPENAI_MODEL_PLANNER?: string;
@@ -37,5 +37,17 @@ declare const envSchema: z.ZodObject<{
     OPENAI_VECTOR_STORE?: string;
 }>;
 export type EnvType = z.infer<typeof envSchema>;
-export declare const ENV: EnvType;
+export declare const ENV: {
+    NODE_ENV: string;
+    NC_COMMUNICATION_API_URL: string;
+    NC_COMMUNICATION_API_TOKEN: string;
+    NC_API_URL: string;
+    NC_API_TOKEN: string;
+    NC_SENTINEL_API_URL: string;
+    NEXT_PUBLIC_APP_NAME: string;
+    OPENAI_MODEL_PLANNER: string;
+    OPENAI_MODEL_SALES: string;
+    OPENAI_API_KEY: string;
+    OPENAI_VECTOR_STORE: string;
+};
 export {};

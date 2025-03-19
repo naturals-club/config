@@ -6,8 +6,8 @@ const envSchema = z.object({
   NC_COMMUNICATION_API_URL: z.string().url(),
   NC_COMMUNICATION_API_TOKEN: z.string().min(1),
 
-  NC_API_URL: z.string().url(),
-  NC_API_TOKEN: z.string().min(1),
+  NEXT_PUBLIC_NC_API_URL: z.string().url(),
+  NEXT_PUBLIC_NC_API_TOKEN: z.string().min(1),
 
   NC_SENTINEL_API_URL: z.string().url(),
   // NC_SENTINEL_API_TOKEN: z.string().min(1),
@@ -39,7 +39,7 @@ export const ENV = {
   OPENAI_MODEL_SALES: process.env.OPENAI_MODEL_SALES,
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   OPENAI_VECTOR_STORE: process.env.OPENAI_VECTOR_STORE,
-} as EnvType;
+};
 
 if (typeof window === "undefined" && !parsed.success) {
   console.error("Erro na validação das variáveis de ambiente:");
