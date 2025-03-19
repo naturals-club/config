@@ -6,5 +6,5 @@ export declare class CRUD {
     create(data: any): Promise<any>;
     update(id: string | number, data: any): Promise<any>;
     delete(id: string | number): Promise<any>;
-    static merge(key: string, obj: Record<string, any>): CRUD;
+    static merge(key: string, obj: Record<string, any>): CRUD & Record<string, any>;
 }

@@ -31,7 +31,7 @@ export declare const api: {
             };
         };
     };
-    contacts: CRUD;
+    contacts: CRUD & Record<string, any>;
     setup: {
         setBaseUrl: (url: string) => void;
         setHeaders: (headers: Record<string, any>) => void;

@@ -59,7 +59,7 @@ export class CRUD {
     }
   }
 
-  static merge(key: string, obj: Record<string, any>) {
+  static merge(key: string, obj: Record<string, any>): CRUD & Record<string, any> {
     const instance = new CRUD(key);
 
     for (const key in obj)
