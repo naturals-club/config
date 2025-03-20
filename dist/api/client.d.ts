@@ -1,3 +1,4 @@
+import '../logger';
 export interface RequestConfig {
     method?: string;
     headers?: HeadersInit;

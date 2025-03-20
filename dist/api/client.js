@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.client = exports.HttpClient = void 0;
-const logger_1 = require("../logger");
 const env_1 = require("../env");
+require("../logger");
 class HttpClient {
     static instance;
     defaultUrl;
@@ -57,18 +57,18 @@ class HttpClient {
         if (config.body) {
             body = config.body instanceof FormData ? config.body : JSON.stringify(config.body);
         }
-        logger_1.logger.info(`Requesting ${method}: ${fullUrl}`, { headers, body });
+        console.info(`Requesting ${method}: ${fullUrl}`, { headers, body });
         try {
             const response = await fetch(fullUrl, { method, headers, body });
             const data = await response.json().catch(() => null);
             if (!response.ok) {
                 throw new Error(data?.message || `Request failed with status ${response.status}`);
             }
-            logger_1.logger.info(`Response from ${method}: ${fullUrl}`, data);
+            console.info(`Response from ${method}: ${fullUrl}`, data);
             return data;
         }
         catch (error) {
-            logger_1.logger.error(`Request failed for ${method} ${fullUrl}`, { error });
+            console.error(`Request failed for ${method} ${fullUrl}`, { error });
             throw error;
         }
     }

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CRUD = void 0;
-const logger_1 = require("../logger");
 const client_1 = require("./client");
+require("../logger");
 class CRUD {
     entity;
     constructor(entity) {
@@ -15,7 +15,7 @@ class CRUD {
             return response?.data;
         }
         catch (error) {
-            logger_1.logger.error(`Error fetching ${this.entity} list:`, error);
+            console.error(`Error fetching ${this.entity} list:`, error);
             throw error;
         }
     }
@@ -25,7 +25,7 @@ class CRUD {
             return response?.data;
         }
         catch (error) {
-            logger_1.logger.error(`Error fetching ${this.entity} with id ${id}:`, error);
+            console.error(`Error fetching ${this.entity} with id ${id}:`, error);
             throw error;
         }
     }
@@ -35,7 +35,7 @@ class CRUD {
             return response?.data;
         }
         catch (error) {
-            logger_1.logger.error(`Error creating ${this.entity}:`, error);
+            console.error(`Error creating ${this.entity}:`, error);
             throw error;
         }
     }
@@ -45,7 +45,7 @@ class CRUD {
             return response?.data;
         }
         catch (error) {
-            logger_1.logger.error(`Error updating ${this.entity} with id ${id}:`, error);
+            console.error(`Error updating ${this.entity} with id ${id}:`, error);
             throw error;
         }
     }
@@ -55,7 +55,7 @@ class CRUD {
             return response?.data;
         }
         catch (error) {
-            logger_1.logger.error(`Error deleting ${this.entity} with id ${id}:`, error);
+            console.error(`Error deleting ${this.entity} with id ${id}:`, error);
             throw error;
         }
     }

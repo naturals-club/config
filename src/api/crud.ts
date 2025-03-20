@@ -1,5 +1,5 @@
-import { logger } from '../logger';
 import { client } from "./client";
+import '../logger';
 
 export class CRUD {
   private entity: string;
@@ -14,7 +14,7 @@ export class CRUD {
       const response = await client.get(`/${this.entity}?${queryString}`) as any;
       return response?.data;
     } catch (error) {
-      logger.error(`Error fetching ${this.entity} list:`, error);
+      console.error(`Error fetching ${this.entity} list:`, error);
       throw error;
     }
   }
@@ -24,7 +24,7 @@ export class CRUD {
       const response = await client.get(`/${this.entity}/${id}`) as any;
       return response?.data;
     } catch (error) {
-      logger.error(`Error fetching ${this.entity} with id ${id}:`, error);
+      console.error(`Error fetching ${this.entity} with id ${id}:`, error);
       throw error;
     }
   }
@@ -34,7 +34,7 @@ export class CRUD {
       const response = await client.post(`/${this.entity}`, data) as any;
       return response?.data;
     } catch (error) {
-      logger.error(`Error creating ${this.entity}:`, error);
+      console.error(`Error creating ${this.entity}:`, error);
       throw error;
     }
   }
@@ -44,7 +44,7 @@ export class CRUD {
       const response = await client.put(`/${this.entity}/${id}`, data) as any;
       return response?.data;
     } catch (error) {
-      logger.error(`Error updating ${this.entity} with id ${id}:`, error);
+      console.error(`Error updating ${this.entity} with id ${id}:`, error);
       throw error;
     }
   }
@@ -54,7 +54,7 @@ export class CRUD {
       const response = await client.delete(`/${this.entity}/${id}`) as any;
       return response?.data;
     } catch (error) {
-      logger.error(`Error deleting ${this.entity} with id ${id}:`, error);
+      console.error(`Error deleting ${this.entity} with id ${id}:`, error);
       throw error;
     }
   }

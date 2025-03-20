@@ -11,25 +11,15 @@ export class Logger {
 
   print(level: string, message: string, meta: Record<string, any> = {}) {
     const timestamp = new Date().toISOString();
-    const log = {
+    const log = process.env.NEXT_PUBLIC_DISABLE_CUSTOM_LOGS === "true" ? message : JSON.stringify({
       timestamp,
       level,
       message,
       ...meta,
-    };
-    if (typeof window !== "undefined" && window.console) {
-      if (level === "info") {
-        console.log(JSON.stringify(log));
-      } else if (level === "info") {
-        console.info(JSON.stringify(log));
-      } else if (level === "warn") {
-        console.warn(JSON.stringify(log));
-      } else if (level === "error") {
-        console.error(JSON.stringify(log));
-      } else if (level === "debug") {
-        console.debug(JSON.stringify(log));
-      }
-    }
+    });
+
+    if (typeof window !== "undefined" && window.console)
+      console[level](log);
   }
 
   log(message: string, meta?: object) {

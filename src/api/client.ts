@@ -1,5 +1,5 @@
-import { logger } from '../logger';
 import { ENV } from '../env';
+import '../logger';
 
 export interface RequestConfig {
   method?: string;
@@ -74,7 +74,7 @@ export class HttpClient {
       body = config.body instanceof FormData ? config.body : JSON.stringify(config.body);
     }
 
-    logger.info(`Requesting ${method}: ${fullUrl}`, { headers, body });
+    console.info(`Requesting ${method}: ${fullUrl}`, { headers, body });
 
     try {
       const response = await fetch(fullUrl, { method, headers, body });
@@ -84,10 +84,10 @@ export class HttpClient {
         throw new Error(data?.message || `Request failed with status ${response.status}`);
       }
 
-      logger.info(`Response from ${method}: ${fullUrl}`, data);
+      console.info(`Response from ${method}: ${fullUrl}`, data);
       return data;
     } catch (error) {
-      logger.error(`Request failed for ${method} ${fullUrl}`, { error });
+      console.error(`Request failed for ${method} ${fullUrl}`, { error });
       throw error;
     }
   }

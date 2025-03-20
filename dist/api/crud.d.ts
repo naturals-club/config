@@ -1,3 +1,4 @@
+import '../logger';
 export declare class CRUD {
     private entity;
     constructor(entity: string);
