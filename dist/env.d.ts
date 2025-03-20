@@ -7,6 +7,7 @@ declare const envSchema: z.ZodObject<{
     NEXT_PUBLIC_NC_API_TOKEN: z.ZodString;
     NC_SENTINEL_API_URL: z.ZodString;
     NEXT_PUBLIC_APP_NAME: z.ZodString;
+    EXPO_PUBLIC_NC_DISABLE_CUSTOM_LOGS: z.ZodString;
     OPENAI_MODEL_PLANNER: z.ZodString;
     OPENAI_MODEL_SALES: z.ZodString;
     OPENAI_API_KEY: z.ZodString;
@@ -19,6 +20,7 @@ declare const envSchema: z.ZodObject<{
     NEXT_PUBLIC_NC_API_TOKEN?: string;
     NC_SENTINEL_API_URL?: string;
     NEXT_PUBLIC_APP_NAME?: string;
+    EXPO_PUBLIC_NC_DISABLE_CUSTOM_LOGS?: string;
     OPENAI_MODEL_PLANNER?: string;
     OPENAI_MODEL_SALES?: string;
     OPENAI_API_KEY?: string;
@@ -31,6 +33,7 @@ declare const envSchema: z.ZodObject<{
     NEXT_PUBLIC_NC_API_TOKEN?: string;
     NC_SENTINEL_API_URL?: string;
     NEXT_PUBLIC_APP_NAME?: string;
+    EXPO_PUBLIC_NC_DISABLE_CUSTOM_LOGS?: string;
     OPENAI_MODEL_PLANNER?: string;
     OPENAI_MODEL_SALES?: string;
     OPENAI_API_KEY?: string;
@@ -45,6 +48,7 @@ export declare const ENV: {
     NC_API_TOKEN: string;
     NC_SENTINEL_API_URL: string;
     NEXT_PUBLIC_APP_NAME: string;
+    NC_DISABLE_CUSTOM_LOGS: string;
     OPENAI_MODEL_PLANNER: string;
     OPENAI_MODEL_SALES: string;
     OPENAI_API_KEY: string;

@@ -11,7 +11,7 @@ class Logger {
     }
     print(level, message, meta = {}) {
         const timestamp = new Date().toISOString();
-        const log = process.env.NEXT_PUBLIC_DISABLE_CUSTOM_LOGS === "true" ? message : JSON.stringify({
+        const log = env_1.ENV.NC_DISABLE_CUSTOM_LOGS === "true" ? message : JSON.stringify({
             timestamp,
             level,
             message,
