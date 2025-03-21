@@ -2,7 +2,7 @@ export interface CreateChatParams {
     refer_id: string;
     thread_id: string;
     ai_enabled: boolean;
-    profile_picture: string;
+    profile_picture?: string;
 }
 export declare const Chat: {
     status: () => any;

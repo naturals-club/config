@@ -4,7 +4,7 @@ export interface CreateChatParams {
   refer_id: string; // <WA_ID>
   thread_id: string; // <THREAD_ID>
   ai_enabled: boolean; // <BOOLEAN>
-  profile_picture: string; // <URL>
+  profile_picture?: string; // <URL>
 }
 
 export const Chat = {
