@@ -12,7 +12,7 @@ const envSchema = z.object({
   NC_SENTINEL_API_URL: z.string().url(),
   // NC_SENTINEL_API_TOKEN: z.string().min(1),
   NEXT_PUBLIC_APP_NAME: z.string().min(1),
-  EXPO_PUBLIC_NC_DISABLE_CUSTOM_LOGS: z.string().min(1),
+  EXPO_PUBLIC_NC_DISABLE_CUSTOM_LOGS: z.string().min(1).optional(),
 
   OPENAI_MODEL_PLANNER: z.string().min(1),
   OPENAI_MODEL_SALES: z.string().min(1),

@@ -7,7 +7,7 @@ declare const envSchema: z.ZodObject<{
     NEXT_PUBLIC_NC_API_TOKEN: z.ZodString;
     NC_SENTINEL_API_URL: z.ZodString;
     NEXT_PUBLIC_APP_NAME: z.ZodString;
-    EXPO_PUBLIC_NC_DISABLE_CUSTOM_LOGS: z.ZodString;
+    EXPO_PUBLIC_NC_DISABLE_CUSTOM_LOGS: z.ZodOptional<z.ZodString>;
     OPENAI_MODEL_PLANNER: z.ZodString;
     OPENAI_MODEL_SALES: z.ZodString;
     OPENAI_API_KEY: z.ZodString;
