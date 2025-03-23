@@ -14,10 +14,10 @@ const envSchema = z.object({
   NEXT_PUBLIC_APP_NAME: z.string().min(1),
   EXPO_PUBLIC_NC_DISABLE_CUSTOM_LOGS: z.string().min(1).optional(),
 
-  OPENAI_MODEL_PLANNER: z.string().min(1),
-  OPENAI_MODEL_SALES: z.string().min(1),
-  OPENAI_API_KEY: z.string().min(1),
-  OPENAI_VECTOR_STORE: z.string().min(1),
+  // OPENAI_MODEL_PLANNER: z.string().min(1),
+  // OPENAI_MODEL_SALES: z.string().min(1),
+  // OPENAI_API_KEY: z.string().min(1),
+  // OPENAI_VECTOR_STORE: z.string().min(1),
 });
 
 const parsed = envSchema.safeParse(process.env);
