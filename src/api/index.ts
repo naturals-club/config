@@ -17,6 +17,10 @@ export const api = {
   users: new CRUD("users"),
   plans: new CRUD("plans"),
   chats: Chat,
+  legal: {
+    privay: () => client.get("/legal/privacy-policies"),
+    terms: () => client.get("/legal/terms-of-service"),
+  },
   contacts: CRUD.merge("contacts", {
     forms: (contactId: string | number) => ({
       create: (data: any) => client.post(`/contacts/forms`, { ...data, contact: contactId }),
