@@ -20,7 +20,7 @@ exports.api = {
     plans: new crud_1.CRUD("plans"),
     chats: chats_1.Chat,
     legal: {
-        privay: () => client_1.client.get("/legal/privacy-policies"),
+        privacy: () => client_1.client.get("/legal/privacy-policies"),
         terms: () => client_1.client.get("/legal/terms-of-service"),
     },
     contacts: crud_1.CRUD.merge("contacts", {

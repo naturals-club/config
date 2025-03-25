@@ -18,7 +18,7 @@ export const api = {
   plans: new CRUD("plans"),
   chats: Chat,
   legal: {
-    privay: () => client.get("/legal/privacy-policies"),
+    privacy: () => client.get("/legal/privacy-policies"),
     terms: () => client.get("/legal/terms-of-service"),
   },
   contacts: CRUD.merge("contacts", {

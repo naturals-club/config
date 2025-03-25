@@ -32,7 +32,7 @@ export declare const api: {
         };
     };
     legal: {
-        privay: () => Promise<unknown>;
+        privacy: () => Promise<unknown>;
         terms: () => Promise<unknown>;
     };
     contacts: CRUD & Record<string, any>;
