@@ -18,8 +18,16 @@ export const api = {
   plans: new CRUD("plans"),
   chats: Chat,
   legal: {
-    privacy: () => client.get("/legal/privacy-policies"),
-    terms: () => client.get("/legal/terms-of-service"),
+    privacy: () => client.get("/legal/privacy-policies", {
+      headers: {
+        "content-type": "text/plain"
+      }
+    }),
+    terms: () => client.get("/legal/terms-of-service", {
+      headers: {
+        "content-type": "text/plain"
+      }
+    }),
   },
   contacts: CRUD.merge("contacts", {
     forms: (contactId: string | number) => ({
