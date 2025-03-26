@@ -6,8 +6,8 @@ export interface RequestConfig {
 }
 export declare class HttpClient {
     private static instance;
-    private defaultUrl;
     private defaultHeaders;
+    defaultUrl: string;
     private constructor();
     static getInstance(): HttpClient;
     static cloneInstance(): HttpClient;

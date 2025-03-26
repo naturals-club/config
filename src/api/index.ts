@@ -20,12 +20,12 @@ export const api = {
   legal: {
     privacy: () => client.get("/legal/privacy-policies", {
       headers: {
-        "content-type": "text/plain"
+        "Content-Type": "text/plain"
       }
     }),
-    terms: () => client.get("/legal/terms-of-service", {
+    terms: () => client.get("/legal/terms-of-use", {
       headers: {
-        "content-type": "text/plain"
+        "Content-Type": "text/plain"
       }
     }),
   },

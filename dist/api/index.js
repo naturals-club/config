@@ -22,12 +22,12 @@ exports.api = {
     legal: {
         privacy: () => client_1.client.get("/legal/privacy-policies", {
             headers: {
-                "content-type": "text/plain"
+                "Content-Type": "text/plain"
             }
         }),
-        terms: () => client_1.client.get("/legal/terms-of-service", {
+        terms: () => client_1.client.get("/legal/terms-of-use", {
             headers: {
-                "content-type": "text/plain"
+                "Content-Type": "text/plain"
             }
         }),
     },

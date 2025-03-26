@@ -9,8 +9,8 @@ export interface RequestConfig {
 
 export class HttpClient {
   private static instance: HttpClient;
-  private defaultUrl: string;
   private defaultHeaders: HeadersInit;
+  public defaultUrl: string;
 
   private constructor() {
     this.defaultUrl = ENV.NC_API_URL;
@@ -78,11 +78,13 @@ export class HttpClient {
 
     try {
       const response = await fetch(fullUrl, { method, headers, body });
-      const data = await response.json().catch(() => null);
+      let data = response as any;
 
-      if (!response.ok) {
+      if (response.headers.get('Content-Type')?.includes('application/json'))
+        data = await response.json().catch(() => null);
+
+      if (!response.ok)
         throw new Error(data?.message || `Request failed with status ${response.status}`);
-      }
 
       console.info(`Response from ${method}: ${fullUrl}`, data);
       return data;

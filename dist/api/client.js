@@ -5,8 +5,8 @@ const env_1 = require("../env");
 require("../logger");
 class HttpClient {
     static instance;
-    defaultUrl;
     defaultHeaders;
+    defaultUrl;
     constructor() {
         this.defaultUrl = env_1.ENV.NC_API_URL;
         this.defaultHeaders = {
@@ -60,10 +60,11 @@ class HttpClient {
         console.info(`Requesting ${method}: ${fullUrl}`, { headers, body });
         try {
             const response = await fetch(fullUrl, { method, headers, body });
-            const data = await response.json().catch(() => null);
-            if (!response.ok) {
+            let data = response;
+            if (response.headers.get('Content-Type')?.includes('application/json'))
+                data = await response.json().catch(() => null);
+            if (!response.ok)
                 throw new Error(data?.message || `Request failed with status ${response.status}`);
-            }
             console.info(`Response from ${method}: ${fullUrl}`, data);
             return data;
         }
