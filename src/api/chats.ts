@@ -28,7 +28,7 @@ export const Chat = {
         metadata: { userId: id },
         tool_resources: {
           file_search: {
-            vector_store_ids: [process.env.OPENAI_VECTOR_STORE as string],
+            vector_store_ids: [process.env.OPENAI_VECTOR_STORE_SALES as string],
           }
         }
       })

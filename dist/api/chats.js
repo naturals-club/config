@@ -22,7 +22,7 @@ exports.Chat = {
                 metadata: { userId: id },
                 tool_resources: {
                     file_search: {
-                        vector_store_ids: [process.env.OPENAI_VECTOR_STORE],
+                        vector_store_ids: [process.env.OPENAI_VECTOR_STORE_SALES],
                     }
                 }
             })

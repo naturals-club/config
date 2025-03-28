@@ -9,15 +9,8 @@ const envSchema = z.object({
   NEXT_PUBLIC_NC_API_URL: z.string().url(),
   NEXT_PUBLIC_NC_API_TOKEN: z.string().min(1),
 
-  NC_SENTINEL_API_URL: z.string().url(),
-  // NC_SENTINEL_API_TOKEN: z.string().min(1),
   NEXT_PUBLIC_APP_NAME: z.string().min(1),
   EXPO_PUBLIC_NC_DISABLE_CUSTOM_LOGS: z.string().min(1).optional(),
-
-  // OPENAI_MODEL_PLANNER: z.string().min(1),
-  // OPENAI_MODEL_SALES: z.string().min(1),
-  // OPENAI_API_KEY: z.string().min(1),
-  // OPENAI_VECTOR_STORE: z.string().min(1),
 });
 
 const parsed = envSchema.safeParse(process.env);
@@ -32,15 +25,14 @@ export const ENV = {
   NC_API_URL: process.env.NEXT_PUBLIC_NC_API_URL || process.env.EXPO_PUBLIC_NC_API_URL,
   NC_API_TOKEN: process.env.NEXT_PUBLIC_NC_API_TOKEN || process.env.EXPO_PUBLIC_NC_API_TOKEN,
 
-  NC_SENTINEL_API_URL: process.env.NC_SENTINEL_API_URL,
-  // NC_SENTINEL_API_TOKEN: process.env.NC_SENTINEL_API_TOKEN,
   NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
   NC_DISABLE_CUSTOM_LOGS: process.env.NEXT_PUBLIC_NC_DISABLE_CUSTOM_LOGS || process.env.EXPO_PUBLIC_NC_DISABLE_CUSTOM_LOGS,
 
   OPENAI_MODEL_PLANNER: process.env.OPENAI_MODEL_PLANNER,
   OPENAI_MODEL_SALES: process.env.OPENAI_MODEL_SALES,
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
-  OPENAI_VECTOR_STORE: process.env.OPENAI_VECTOR_STORE,
+  OPENAI_VECTOR_STORE_PLANNER: process.env.OPENAI_VECTOR_STORE_PLANNER,
+  OPENAI_VECTOR_STORE_SALES: process.env.OPENAI_VECTOR_STORE_SALES,
 };
 
 if (typeof window === "undefined" && !parsed.success) {
