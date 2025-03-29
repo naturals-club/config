@@ -12,10 +12,10 @@ export class HttpClient {
   private defaultHeaders: HeadersInit;
   public defaultUrl: string;
 
-  private constructor() {
-    this.defaultUrl = ENV.NC_API_URL;
+  private constructor(baseUrl?: string, token?: string) {
+    this.defaultUrl = baseUrl || ENV.NC_API_URL;
     this.defaultHeaders = {
-      'Authorization': `Bearer ${ENV.NC_API_TOKEN}`,
+      'Authorization': `Bearer ${token || ENV.NC_API_TOKEN}`,
       'Content-Type': 'application/json'
     };
   }
@@ -27,8 +27,8 @@ export class HttpClient {
     return HttpClient.instance;
   }
 
-  public static cloneInstance(): HttpClient {
-    return new HttpClient();
+  public static cloneInstance(baseUrl?: string, token?: string): HttpClient {
+    return new HttpClient(baseUrl, token);
   }
 
   setBaseUrl(url: string) {

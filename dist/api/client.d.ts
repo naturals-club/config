@@ -10,7 +10,7 @@ export declare class HttpClient {
     defaultUrl: string;
     private constructor();
     static getInstance(): HttpClient;
-    static cloneInstance(): HttpClient;
+    static cloneInstance(baseUrl?: string, token?: string): HttpClient;
     setBaseUrl(url: string): void;
     setAuthorization(token: string): void;
     setHeaders(headers: Record<string, any>): void;
