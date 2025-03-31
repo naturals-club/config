@@ -10,6 +10,11 @@ const envSchema = zod_1.z.object({
     NEXT_PUBLIC_NC_API_TOKEN: zod_1.z.string().min(1),
     NEXT_PUBLIC_APP_NAME: zod_1.z.string().min(1),
     EXPO_PUBLIC_NC_DISABLE_CUSTOM_LOGS: zod_1.z.string().min(1).optional(),
+    OPENAI_MODEL_PLANNER: zod_1.z.string().optional(),
+    OPENAI_MODEL_SALES: zod_1.z.string().optional(),
+    OPENAI_API_KEY: zod_1.z.string().min(1),
+    OPENAI_VECTOR_STORE_PLANNER: zod_1.z.string().optional(),
+    OPENAI_VECTOR_STORE_SALES: zod_1.z.string().optional(),
 });
 const parsed = envSchema.safeParse(process.env);
 exports.ENV = {

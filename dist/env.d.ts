@@ -7,6 +7,11 @@ declare const envSchema: z.ZodObject<{
     NEXT_PUBLIC_NC_API_TOKEN: z.ZodString;
     NEXT_PUBLIC_APP_NAME: z.ZodString;
     EXPO_PUBLIC_NC_DISABLE_CUSTOM_LOGS: z.ZodOptional<z.ZodString>;
+    OPENAI_MODEL_PLANNER: z.ZodOptional<z.ZodString>;
+    OPENAI_MODEL_SALES: z.ZodOptional<z.ZodString>;
+    OPENAI_API_KEY: z.ZodString;
+    OPENAI_VECTOR_STORE_PLANNER: z.ZodOptional<z.ZodString>;
+    OPENAI_VECTOR_STORE_SALES: z.ZodOptional<z.ZodString>;
 }, "strip", z.ZodTypeAny, {
     NODE_ENV?: string;
     NC_COMMUNICATION_API_URL?: string;
@@ -15,6 +20,11 @@ declare const envSchema: z.ZodObject<{
     NEXT_PUBLIC_NC_API_TOKEN?: string;
     NEXT_PUBLIC_APP_NAME?: string;
     EXPO_PUBLIC_NC_DISABLE_CUSTOM_LOGS?: string;
+    OPENAI_MODEL_PLANNER?: string;
+    OPENAI_MODEL_SALES?: string;
+    OPENAI_API_KEY?: string;
+    OPENAI_VECTOR_STORE_PLANNER?: string;
+    OPENAI_VECTOR_STORE_SALES?: string;
 }, {
     NODE_ENV?: string;
     NC_COMMUNICATION_API_URL?: string;
@@ -23,6 +33,11 @@ declare const envSchema: z.ZodObject<{
     NEXT_PUBLIC_NC_API_TOKEN?: string;
     NEXT_PUBLIC_APP_NAME?: string;
     EXPO_PUBLIC_NC_DISABLE_CUSTOM_LOGS?: string;
+    OPENAI_MODEL_PLANNER?: string;
+    OPENAI_MODEL_SALES?: string;
+    OPENAI_API_KEY?: string;
+    OPENAI_VECTOR_STORE_PLANNER?: string;
+    OPENAI_VECTOR_STORE_SALES?: string;
 }>;
 export type EnvType = z.infer<typeof envSchema>;
 export declare const ENV: {
