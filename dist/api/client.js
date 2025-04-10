@@ -65,7 +65,7 @@ class HttpClient {
                 data = await response.json().catch(() => null);
             if (!response.ok)
                 throw new Error(data?.message || `Request failed with status ${response.status}`);
-            console.info(`Response from ${method}: ${fullUrl}`, data);
+            console.info(`Response from ${method}: ${fullUrl}`);
             return data;
         }
         catch (error) {
