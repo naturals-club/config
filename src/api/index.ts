@@ -11,6 +11,7 @@ export const api = {
   routines: new CRUD("routines"),
   consults: new CRUD("consults"),
   workouts: new CRUD("workouts"),
+  products: new CRUD("products"),
   states: new CRUD("states"),
   diets: new CRUD("diets"),
   foods: new CRUD("foods"),

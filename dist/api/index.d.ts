@@ -8,6 +8,7 @@ export declare const api: {
     routines: CRUD;
     consults: CRUD;
     workouts: CRUD;
+    products: CRUD;
     states: CRUD;
     diets: CRUD;
     foods: CRUD;
