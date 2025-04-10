@@ -10,16 +10,20 @@ export class Logger {
   }
 
   print(level: string, message: string, meta: Record<string, any> = {}) {
-    const timestamp = new Date().toISOString();
-    const log = ENV.NC_DISABLE_CUSTOM_LOGS === "true" ? message : JSON.stringify({
-      timestamp,
-      level,
-      message,
-      ...meta,
-    });
+    try {
+      const timestamp = new Date().toISOString();
+      const log = ENV.NC_DISABLE_CUSTOM_LOGS === "true" ? message : JSON.stringify({
+        timestamp,
+        level,
+        message,
+        ...meta,
+      });
 
-    if (typeof window !== "undefined" && window.console)
-      console[level](log);
+      if (typeof window !== "undefined" && window.console)
+        console[level](log);
+    } catch (error) {
+      console.log("Error logging message:", error);
+    }
   }
 
   log(message: string, meta?: object) {

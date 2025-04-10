@@ -10,15 +10,20 @@ class Logger {
         this.defaultMeta = { ...defaultMeta, project: env_1.ENV.NEXT_PUBLIC_APP_NAME };
     }
     print(level, message, meta = {}) {
-        const timestamp = new Date().toISOString();
-        const log = env_1.ENV.NC_DISABLE_CUSTOM_LOGS === "true" ? message : JSON.stringify({
-            timestamp,
-            level,
-            message,
-            ...meta,
-        });
-        if (typeof window !== "undefined" && window.console)
-            console[level](log);
+        try {
+            const timestamp = new Date().toISOString();
+            const log = env_1.ENV.NC_DISABLE_CUSTOM_LOGS === "true" ? message : JSON.stringify({
+                timestamp,
+                level,
+                message,
+                ...meta,
+            });
+            if (typeof window !== "undefined" && window.console)
+                console[level](log);
+        }
+        catch (error) {
+            console.log("Error logging message:", error);
+        }
     }
     log(message, meta) {
         this.print("log", message, meta);
