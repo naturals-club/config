@@ -41,29 +41,3 @@ export class Logger {
 
 export const logger = new Logger();
 export default logger;
-
-if (ENV.NODE_ENV === "production" && typeof window !== "undefined") {
-  const oldConsole = window.console;
-  window.console = {
-    log: (...args: any[]) => {
-      logger.info(args.map(String).join(" "));
-      oldConsole.log(...args);
-    },
-    error: (...args: any[]) => {
-      logger.error(args.map(String).join(" "));
-      oldConsole.error(...args);
-    },
-    warn: (...args: any[]) => {
-      logger.warn(args.map(String).join(" "));
-      oldConsole.warn(...args);
-    },
-    info: (...args: any[]) => {
-      logger.info(args.map(String).join(" "));
-      oldConsole.info(...args);
-    },
-    debug: (...args: any[]) => {
-      logger.debug(args.map(String).join(" "));
-      oldConsole.debug(...args);
-    },
-  } as Console;
-}
