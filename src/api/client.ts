@@ -74,7 +74,7 @@ export class HttpClient {
       body = config.body instanceof FormData ? config.body : JSON.stringify(config.body);
     }
 
-    console.info(`Requesting ${method}: ${fullUrl}`, { headers, body });
+    console.info(`Requesting ${method}: ${fullUrl}`, { headers });
 
     try {
       const response = await fetch(fullUrl, { method, headers, body });
