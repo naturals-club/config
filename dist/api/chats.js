@@ -29,7 +29,13 @@ exports.Chat = {
                 }
             })
         }).then(res => res.json());
-        console.log(`==== [${id}] Creating contact on Naturals`);
+        console.log(`==== [${id}] Creating contact on Naturals`, {
+            ai_enabled: true,
+            refer_id: id,
+            thread_id: threadId,
+            conversation_id: conversationSid,
+            first_message: firstMessage,
+        });
         const { data } = await client_1.client.post(`/chats`, {
             ai_enabled: true,
             refer_id: id,
