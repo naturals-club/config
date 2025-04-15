@@ -21,6 +21,13 @@ export declare const api: {
         get: (id: string) => Promise<any>;
         create: (data: import("./chats").CreateChatParams) => Promise<any>;
         update: ((id: string, data: any) => Promise<any>) & {
+            lastMessage: (id: string, params: {
+                content: {
+                    id: string;
+                    body: string;
+                };
+                created_at: Date;
+            }) => Promise<any>;
             agent: (id: string) => Promise<any>;
         };
         conversations: {

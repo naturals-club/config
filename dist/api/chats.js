@@ -37,6 +37,7 @@ exports.Chat = {
     },
     create: async (data) => client_1.client.post(`/chats`, data),
     update: Object.assign(async (id, data) => client_1.client.put(`/chats/${id}`, data), {
+        lastMessage: async (id, params) => client_1.client.put(`/chats/${id}/last-message`, params),
         agent: async (id) => client_1.client.put(`/chats/${id}/ai`),
     }),
     conversations: {

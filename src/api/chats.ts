@@ -47,6 +47,7 @@ export const Chat = {
   update: Object.assign(
     async (id: string, data: any) => client.put(`/chats/${id}`, data) as any,
     {
+      lastMessage: async (id: string, params: { content: { id: string, body: string }, created_at: Date }) => client.put(`/chats/${id}/last-message`, params) as any,
       agent: async (id: string) => client.put(`/chats/${id}/ai`) as any,
     }
   ),
