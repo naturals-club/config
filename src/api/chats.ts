@@ -43,6 +43,7 @@ export const Chat = {
       refer_id: id,
       thread_id: threadId,
       conversation_id: conversationSid,
+      first_message: firstMessage,
     }) as any;
 
     return data;
