@@ -18,7 +18,7 @@ export declare const api: {
         status: () => any;
         qrcode: () => any;
         list: () => Promise<any>;
-        get: (id: string) => Promise<any>;
+        get: (id: string, conversationSid?: string, firstMessage?: any) => Promise<any>;
         create: (data: import("./chats").CreateChatParams) => Promise<any>;
         update: ((id: string, data: any) => Promise<any>) & {
             lastMessage: (id: string, params: {

@@ -8,7 +8,7 @@ export declare const Chat: {
     status: () => any;
     qrcode: () => any;
     list: () => Promise<any>;
-    get: (id: string) => Promise<any>;
+    get: (id: string, conversationSid?: string, firstMessage?: any) => Promise<any>;
     create: (data: CreateChatParams) => Promise<any>;
     update: ((id: string, data: any) => Promise<any>) & {
         lastMessage: (id: string, params: {

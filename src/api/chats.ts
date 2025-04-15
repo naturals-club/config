@@ -11,10 +11,13 @@ export const Chat = {
   status: () => client.get("/chats/instance/status") as any,
   qrcode: () => client.get("/chats/instance/qr-code") as any,
   list: async () => client.get("/chats") as any,
-  get: async (id: string) => {
+  get: async (id: string, conversationSid?: string, firstMessage?: any) => {
     const chat = await client.get(`/chats?refer_id=${id}`).then(({ data }: any) => data?.items?.[0]);
 
     if (!!chat && !!chat.id) return chat;
+
+    if (!conversationSid || !firstMessage)
+      throw new Error("Conversation SID and first message are required to create a new chat");
 
     console.log(`==== [${id}] Creating OpenAI thread`);
     const { id: threadId } = await fetch("https://api.openai.com/v1/threads", {
@@ -39,6 +42,7 @@ export const Chat = {
       ai_enabled: true,
       refer_id: id,
       thread_id: threadId,
+      conversation_id: conversationSid,
     }) as any;
 
     return data;
