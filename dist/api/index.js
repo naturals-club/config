@@ -35,7 +35,7 @@ exports.api = {
     contacts: crud_1.CRUD.merge("contacts", {
         forms: (contactId) => ({
             create: (data) => client_1.client.post(`/contacts/forms`, { ...data, contact: contactId }),
-            list: (params = {}) => client_1.client.get(`/contacts/forms?${new URLSearchParams(params).toString()}`),
+            list: (params = {}) => client_1.client.get(`/contacts/forms?${new URLSearchParams(params).toString()}`).then((res) => res.data),
             get: (formId) => client_1.client.get(`/contacts/forms/${formId}`),
         }),
         orders: (contactId) => ({

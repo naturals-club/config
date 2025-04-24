@@ -33,7 +33,7 @@ export const api = {
   contacts: CRUD.merge("contacts", {
     forms: (contactId: string | number) => ({
       create: (data: any) => client.post(`/contacts/forms`, { ...data, contact: contactId }),
-      list: (params: any = {}) => client.get(`/contacts/forms?${new URLSearchParams(params).toString()}`),
+      list: (params: any = {}) => client.get(`/contacts/forms?${new URLSearchParams(params).toString()}`).then((res: any) => res.data),
       get: (formId: string | number) => client.get(`/contacts/forms/${formId}`),
     }),
     orders: (contactId: string) => ({
