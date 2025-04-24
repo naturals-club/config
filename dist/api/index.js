@@ -39,6 +39,7 @@ exports.api = {
         }),
         orders: (contactId) => ({
             create: (data) => client_1.client.post(`/contacts/orders`, { ...data, contact: contactId }),
+            list: () => client_1.client.get(`/contacts/orders`),
             get: (orderId) => client_1.client.get(`/contacts/orders/${orderId}`),
         }),
         tasks: new crud_1.CRUD(`contacts/tasks`)
