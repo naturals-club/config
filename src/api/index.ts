@@ -33,11 +33,11 @@ export const api = {
   contacts: CRUD.merge("contacts", {
     forms: (contactId: string | number) => ({
       create: (data: any) => client.post(`/contacts/forms`, { ...data, contact: contactId }),
+      list: (params: any = {}) => client.get(`/contacts/forms?${new URLSearchParams(params).toString()}`),
       get: (formId: string | number) => client.get(`/contacts/forms/${formId}`),
     }),
     orders: (contactId: string) => ({
       create: (data: any) => client.post(`/contacts/orders`, { ...data, contact: contactId }),
-      list: () => client.get(`/contacts/orders`),
       get: (orderId: string | number) => client.get(`/contacts/orders/${orderId}`),
     }),
     tasks: new CRUD(`contacts/tasks`)
