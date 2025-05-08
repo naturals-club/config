@@ -14,10 +14,7 @@ export const Chat = {
   get: async (id: string, conversationSid?: string, firstMessage?: any) => {
     const chat = await client.get(`/chats?refer_id=${id}`).then(({ data }: any) => data?.items?.[0]);
 
-    if (!!chat && !!chat.id) return chat;
-
-    if (!conversationSid || !firstMessage)
-      throw new Error("Conversation SID and first message are required to create a new chat");
+    if (!!chat && !!chat.id && chat.thread_id) return chat;
 
     console.log(`==== [${id}] Creating OpenAI thread`);
     const { id: threadId } = await fetch("https://api.openai.com/v1/threads", {
@@ -36,6 +33,15 @@ export const Chat = {
         }
       })
     }).then(res => res.json());
+
+    if (chat.id) {
+      console.log(`==== [${id}] Updating OpenAI thread`);
+      await client.put(`/chats/${chat.id}`, { thread_id: threadId });
+      return { ...chat, thread_id: threadId };
+    }
+
+    if (!conversationSid || !firstMessage)
+      throw new Error("Conversation SID and first message are required to create a new chat");
 
     console.log(`==== [${id}] Creating contact on Naturals`, {
       ai_enabled: true,
