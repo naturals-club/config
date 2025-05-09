@@ -15,26 +15,31 @@ export const Chat = {
     const chat = await client.get(`/chats?refer_id=${id}`).then(({ data }: any) => data?.items?.[0]);
 
     if (!!chat && !!chat.id && chat.thread_id) return chat;
+    let threadId = chat?.thread_id;
 
-    console.log(`==== [${id}] Creating OpenAI thread`);
-    const { id: threadId } = await fetch("https://api.openai.com/v1/threads", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-        "Content-Type": "application/json",
-        "OpenAI-Beta": "assistants=v2",
-      },
-      body: JSON.stringify({
-        metadata: { userId: id },
-        tool_resources: {
-          file_search: {
-            vector_store_ids: [process.env.OPENAI_VECTOR_STORE_SALES as string],
+    if (!threadId) {
+      console.log(`==== [${id}] Creating OpenAI thread`);
+      const res = await fetch("https://api.openai.com/v1/threads", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+          "Content-Type": "application/json",
+          "OpenAI-Beta": "assistants=v2",
+        },
+        body: JSON.stringify({
+          metadata: { userId: id },
+          tool_resources: {
+            file_search: {
+              vector_store_ids: [process.env.OPENAI_VECTOR_STORE_SALES as string],
+            }
           }
-        }
-      })
-    }).then(res => res.json());
+        })
+      }).then(res => res.json());
+      console.log(res);
+      threadId = res.id;
+    }
 
-    if (chat.id) {
+    if (chat?.id && !chat?.thread_id) {
       console.log(`==== [${id}] Updating OpenAI thread`);
       await client.put(`/chats/${chat.id}`, { thread_id: threadId });
       return { ...chat, thread_id: threadId };
