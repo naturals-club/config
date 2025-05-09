@@ -32,8 +32,6 @@ exports.Chat = {
             await client_1.client.put(`/chats/${chat.id}`, { thread_id: threadId });
             return { ...chat, thread_id: threadId };
         }
-        if (!conversationSid || !firstMessage)
-            throw new Error("Conversation SID and first message are required to create a new chat");
         console.log(`==== [${id}] Creating contact on Naturals`, {
             ai_enabled: true,
             refer_id: id,
