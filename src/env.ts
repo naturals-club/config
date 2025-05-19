@@ -3,8 +3,8 @@ import { z } from "zod";
 const envSchema = z.object({
   NODE_ENV: z.string().default("development"),
 
-  NC_COMMUNICATION_API_URL: z.string().url(),
-  NC_COMMUNICATION_API_TOKEN: z.string().min(1),
+  NC_COMMUNICATION_API_URL: z.string().url().optional(),
+  NC_COMMUNICATION_API_TOKEN: z.string().min(1).optional(),
 
   NEXT_PUBLIC_NC_API_URL: z.string().url(),
   NEXT_PUBLIC_NC_API_TOKEN: z.string().min(1),

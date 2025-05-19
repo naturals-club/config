@@ -1,8 +1,8 @@
 import { z } from "zod";
 declare const envSchema: z.ZodObject<{
     NODE_ENV: z.ZodDefault<z.ZodString>;
-    NC_COMMUNICATION_API_URL: z.ZodString;
-    NC_COMMUNICATION_API_TOKEN: z.ZodString;
+    NC_COMMUNICATION_API_URL: z.ZodOptional<z.ZodString>;
+    NC_COMMUNICATION_API_TOKEN: z.ZodOptional<z.ZodString>;
     NEXT_PUBLIC_NC_API_URL: z.ZodString;
     NEXT_PUBLIC_NC_API_TOKEN: z.ZodString;
     NEXT_PUBLIC_APP_NAME: z.ZodString;

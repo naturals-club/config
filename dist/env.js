@@ -4,8 +4,8 @@ exports.ENV = void 0;
 const zod_1 = require("zod");
 const envSchema = zod_1.z.object({
     NODE_ENV: zod_1.z.string().default("development"),
-    NC_COMMUNICATION_API_URL: zod_1.z.string().url(),
-    NC_COMMUNICATION_API_TOKEN: zod_1.z.string().min(1),
+    NC_COMMUNICATION_API_URL: zod_1.z.string().url().optional(),
+    NC_COMMUNICATION_API_TOKEN: zod_1.z.string().min(1).optional(),
     NEXT_PUBLIC_NC_API_URL: zod_1.z.string().url(),
     NEXT_PUBLIC_NC_API_TOKEN: zod_1.z.string().min(1),
     NEXT_PUBLIC_APP_NAME: zod_1.z.string().min(1),
