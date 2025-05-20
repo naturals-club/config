@@ -1,5 +1,6 @@
 import { CRUD } from "./crud";
 export declare const api: {
+    workoutSessions: CRUD;
     paymentMethods: CRUD;
     documentTypes: CRUD;
     countries: CRUD;
@@ -7,7 +8,7 @@ export declare const api: {
     students: CRUD;
     routines: CRUD;
     consults: CRUD;
-    workouts: CRUD;
+    workouts: CRUD & Record<string, any>;
     products: CRUD;
     states: CRUD;
     diets: CRUD;

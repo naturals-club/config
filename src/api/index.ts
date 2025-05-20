@@ -3,6 +3,7 @@ import { CRUD } from "./crud";
 import { Chat } from "./chats";
 
 export const api = {
+  workoutSessions: new CRUD("workout-sessions"),
   paymentMethods: new CRUD("payment-methods"),
   documentTypes: new CRUD("document-types"),
   countries: new CRUD("countries"),
@@ -10,7 +11,9 @@ export const api = {
   students: new CRUD("students"),
   routines: new CRUD("routines"),
   consults: new CRUD("consults"),
-  workouts: new CRUD("workouts"),
+  workouts: CRUD.merge("workouts", {
+    sessions: new CRUD("workout-sessions"),
+  }),
   products: new CRUD("products"),
   states: new CRUD("states"),
   diets: new CRUD("diets"),

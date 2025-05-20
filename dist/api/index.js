@@ -5,6 +5,7 @@ const client_1 = require("./client");
 const crud_1 = require("./crud");
 const chats_1 = require("./chats");
 exports.api = {
+    workoutSessions: new crud_1.CRUD("workout-sessions"),
     paymentMethods: new crud_1.CRUD("payment-methods"),
     documentTypes: new crud_1.CRUD("document-types"),
     countries: new crud_1.CRUD("countries"),
@@ -12,7 +13,9 @@ exports.api = {
     students: new crud_1.CRUD("students"),
     routines: new crud_1.CRUD("routines"),
     consults: new crud_1.CRUD("consults"),
-    workouts: new crud_1.CRUD("workouts"),
+    workouts: crud_1.CRUD.merge("workouts", {
+        sessions: new crud_1.CRUD("workout-sessions"),
+    }),
     products: new crud_1.CRUD("products"),
     states: new crud_1.CRUD("states"),
     diets: new crud_1.CRUD("diets"),
