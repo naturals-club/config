@@ -45,7 +45,9 @@ exports.api = {
             create: (data) => client_1.client.post(`/contacts/orders`, { ...data, contact: contactId }),
             get: (orderId) => client_1.client.get(`/contacts/orders/${orderId}`),
         }),
-        tasks: new crud_1.CRUD(`contacts/tasks`)
+        tasks: crud_1.CRUD.merge(`contacts/tasks`, {
+            updateStatus: (taskId, status) => client_1.client.put(`/contacts/tasks/${taskId}/status`, { status }),
+        }),
     }),
     setup: {
         setBaseUrl: client_1.client.setBaseUrl,

@@ -43,7 +43,9 @@ export const api = {
       create: (data: any) => client.post(`/contacts/orders`, { ...data, contact: contactId }),
       get: (orderId: string | number) => client.get(`/contacts/orders/${orderId}`),
     }),
-    tasks: new CRUD(`contacts/tasks`)
+    tasks: CRUD.merge(`contacts/tasks`, {
+      updateStatus: (taskId: string | number, status: "finished" | "pending" | "under_analysis") => client.put(`/contacts/tasks/${taskId}/status`, { status }),
+    }),
   }),
   setup: {
     setBaseUrl: client.setBaseUrl,
