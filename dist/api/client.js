@@ -54,8 +54,12 @@ class HttpClient {
         const fullUrl = this.defaultUrl + url;
         const headers = { ...this.defaultHeaders, ...config.headers };
         let body = null;
-        if (config.body) {
-            body = config.body instanceof FormData ? config.body : JSON.stringify(config.body);
+        if (config.body instanceof FormData) {
+            body = config.body;
+            delete headers['Content-Type'];
+        }
+        else if (config.body) {
+            body = JSON.stringify(config.body);
         }
         console.info(`Requesting ${method}: ${fullUrl}`, { headers });
         try {
