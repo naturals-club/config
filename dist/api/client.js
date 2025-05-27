@@ -15,7 +15,7 @@ const client = axios_1.default.create({
 });
 exports.client = client;
 client.interceptors.response.use((response) => response?.data, (error) => {
-    console.error('API Error:', error);
+    console.error(JSON.stringify(error, null, 2));
     return Promise.reject(error);
 });
 client.setBaseUrl = function (url) {

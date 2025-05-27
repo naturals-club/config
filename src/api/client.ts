@@ -17,7 +17,7 @@ const client = axios.create({
 }) as Client;
 
 client.interceptors.response.use((response) => response?.data, (error) => {
-  console.error('API Error:', error);
+  console.error(JSON.stringify(error, null, 2));
   return Promise.reject(error);
 });
 
