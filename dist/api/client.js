@@ -14,7 +14,11 @@ const client = axios_1.default.create({
     },
 });
 exports.client = client;
-client.interceptors.response.use((response) => response?.data, (error) => {
+client.interceptors.response.use((response) => {
+    if (response.headers["Content-Type"]?.includes("json"))
+        return response;
+    return response?.data;
+}, (error) => {
     console.error(JSON.stringify(error, null, 2));
     return Promise.reject(error);
 });
