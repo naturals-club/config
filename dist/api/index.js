@@ -39,11 +39,7 @@ exports.api = {
         forms: (contactId) => ({
             create: (data) => {
                 data.append("contact", contactId?.toString());
-                return client_1.client.post(`/contacts/forms`, data, {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    }
-                });
+                return client_1.client.post(`/contacts/forms`, data);
             },
             list: (params = {}) => client_1.client.get(`/contacts/forms?${new URLSearchParams({ ...params, contact: contactId }).toString()}`).then((res) => res.data),
             get: (formId) => client_1.client.get(`/contacts/forms/${formId}`),
