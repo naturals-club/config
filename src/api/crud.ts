@@ -10,7 +10,7 @@ export class CRUD {
 
   async list(params: any = {}) {
     try {
-      const response = await client.get(`/${this.entity}?${new URLSearchParams(params).toString()}`) as any;
+      const response = await client.get(`/${this.entity}`, { params });
       return response?.data;
     } catch (error) {
       console.error(`Error fetching ${this.entity} list:`, error);

@@ -10,7 +10,7 @@ class CRUD {
     }
     async list(params = {}) {
         try {
-            const response = await client_1.client.get(`/${this.entity}?${new URLSearchParams(params).toString()}`);
+            const response = await client_1.client.get(`/${this.entity}`, { params });
             return response?.data;
         }
         catch (error) {
