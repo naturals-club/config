@@ -21,11 +21,11 @@ export declare const Chat: {
         agent: (id: string) => Promise<any>;
     };
     conversations: {
-        ai: (id: string | number, enabled: boolean) => Promise<unknown>;
-        list: () => Promise<unknown>;
+        ai: (id: string | number, enabled: boolean) => Promise<import("axios").AxiosResponse<any, any>>;
+        list: () => Promise<import("axios").AxiosResponse<any, any>>;
         messages: {
-            send: (id: string | number, message: string) => Promise<unknown>;
-            get: (id: string | number) => Promise<unknown>;
+            send: (id: string | number, message: string) => Promise<import("axios").AxiosResponse<any, any>>;
+            get: (id: string | number) => Promise<import("axios").AxiosResponse<any, any>>;
         };
     };
 };

@@ -1,102 +1,42 @@
+import axios, { AxiosInstance } from 'axios';
 import { ENV } from '../env';
-import '../logger';
 
-export interface RequestConfig {
-  method?: string;
-  headers?: HeadersInit;
-  body?: any;
+type Client = AxiosInstance & {
+  setBaseUrl: (url: string) => void;
+  setAuthorization: (token: string) => void;
+  setHeaders: (headers: Record<string, any>) => void;
+  cloneInstance: (baseUrl?: string, token?: string) => Client;
 }
 
-export class HttpClient {
-  private static instance: HttpClient;
-  private defaultHeaders: HeadersInit;
-  public defaultUrl: string;
+const client: Client = axios.create({
+  baseURL: ENV.NC_API_URL,
+  headers: {
+    'Authorization': `Bearer ${ENV.NC_API_TOKEN}`,
+    'Content-Type': 'application/json',
+  },
+}) as any;
 
-  private constructor(baseUrl?: string, token?: string) {
-    this.defaultUrl = baseUrl || ENV.NC_API_URL;
-    this.defaultHeaders = {
-      'Authorization': `Bearer ${token || ENV.NC_API_TOKEN}`,
-      'Content-Type': 'application/json'
-    };
-  }
+client.setBaseUrl = function (url: string) {
+  this.defaults.baseURL = url;
+};
 
-  public static getInstance(): HttpClient {
-    if (!HttpClient.instance) {
-      HttpClient.instance = new HttpClient();
-    }
-    return HttpClient.instance;
-  }
+client.setAuthorization = function (token: string) {
+  this.defaults.headers['Authorization'] = `Bearer ${token}`;
+};
 
-  public static cloneInstance(baseUrl?: string, token?: string): HttpClient {
-    return new HttpClient(baseUrl, token);
-  }
+client.setHeaders = function (headers: Record<string, any>) {
+  this.defaults.headers = {
+    ...this.defaults.headers,
+    ...headers,
+  };
+};
 
-  setBaseUrl(url: string) {
-    this.defaultUrl = url;
-  }
+client.cloneInstance = function (baseUrl?: string, token?: string): Client {
+  const clone = Object.assign({}, client);
+  clone.defaults.baseURL = baseUrl || this.defaults.baseURL;
+  clone.defaults.headers['Authorization'] = token ? `Bearer ${token}` : this.defaults.headers['Authorization'];
+  return clone as Client;
+};
 
-  setAuthorization(token: string) {
-    this.defaultHeaders = {
-      ...this.defaultHeaders,
-      "Authorization": `Bearer ${token}`,
-    };
-  }
-
-  setHeaders(headers: Record<string, any>) {
-    this.defaultHeaders = {
-      ...this.defaultHeaders,
-      ...headers
-    };
-  }
-
-  async get<T>(url: string, config: RequestConfig = {}): Promise<T> {
-    return this.request<T>('GET', url, config);
-  }
-
-  async post<T>(url: string, body: any, config: RequestConfig = {}): Promise<T> {
-    return this.request<T>('POST', url, { ...config, body });
-  }
-
-  async put<T>(url: string, body?: any, config: RequestConfig = {}): Promise<T> {
-    return this.request<T>('PUT', url, { ...config, body });
-  }
-
-  async delete<T>(url: string, config: RequestConfig = {}): Promise<T> {
-    return this.request<T>('DELETE', url, config);
-  }
-
-  private async request<T>(method: string, url: string, config: RequestConfig): Promise<T> {
-    const fullUrl = this.defaultUrl + url;
-    const headers: HeadersInit = { ...this.defaultHeaders, ...config.headers };
-    let body: BodyInit | null = null;
-
-    if (config.body instanceof FormData) {
-      body = config.body;
-      delete headers['Content-Type'];
-    } else if (config.body) {
-      body = JSON.stringify(config.body);
-    }
-
-    console.info(`Requesting ${method}: ${fullUrl}`, { headers });
-
-    try {
-      const response = await fetch(fullUrl, { method, headers, body });
-      let data = response as any;
-
-      if (response.headers.get('Content-Type')?.includes('application/json'))
-        data = await response.json().catch(() => null);
-
-      if (!response.ok)
-        throw new Error(data?.message || `Request failed with status ${response.status}`);
-
-      console.info(`Response from ${method}: ${fullUrl}`);
-      return data;
-    } catch (error) {
-      console.error(`Request failed for ${method} ${fullUrl}`, { error });
-      throw error;
-    }
-  }
-}
-
-export const client = HttpClient.getInstance();
 export default client;
+export { client };

@@ -1,7 +1,7 @@
-import { HttpClient } from "../api/client";
+import Client from "../api/client";
 import { ENV } from "../env";
 
-const client = HttpClient.cloneInstance();
+const client = Client.cloneInstance();
 client.setBaseUrl(ENV.NC_COMMUNICATION_API_URL);
 client.setAuthorization(ENV.NC_COMMUNICATION_API_TOKEN);
 
@@ -33,7 +33,7 @@ export const communication = {
 
   // Status da API
   status: {
-    check: (): Promise<StatusResponse> => client.get<StatusResponse>("api"),
+    check: () => client.get<StatusResponse>("api"),
   },
 
   // Slack
@@ -42,7 +42,7 @@ export const communication = {
       send: ({ channel, text }: SlackMessageParams) => client.post<StatusResponse>("api/services/slack/channels/messages", { channel, text }),
     },
     channels: {
-      list: (): Promise<SlackChannelsResponse> => client.get<SlackChannelsResponse>("api/services/slack/channels"),
+      list: () => client.get<SlackChannelsResponse>("api/services/slack/channels"),
     },
   },
 };

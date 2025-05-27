@@ -1,28 +1,28 @@
 export declare const communication: {
     whatsapp: {
         message: {
-            send: ({ conversationSid, message }: SendMessageParams) => Promise<StatusResponse>;
+            send: ({ conversationSid, message }: SendMessageParams) => Promise<import("axios").AxiosResponse<StatusResponse, any>>;
         };
         conversations: {
-            list: () => Promise<WhatsAppConversationListResponse>;
-            get: (conversationSid: string) => Promise<WhatsAppConversationResponse>;
+            list: () => Promise<import("axios").AxiosResponse<WhatsAppConversationListResponse, any>>;
+            get: (conversationSid: string) => Promise<import("axios").AxiosResponse<WhatsAppConversationResponse, any>>;
         };
     };
     email: {
-        send: ({ recipient, subject, content, html, template, variables }: SendEmailParams) => Promise<StatusResponse>;
+        send: ({ recipient, subject, content, html, template, variables }: SendEmailParams) => Promise<import("axios").AxiosResponse<StatusResponse, any>>;
     };
     broadcast: {
-        send: ({ recipient, phone, subject, template, variables }: SendBroadcastParams) => Promise<StatusResponse>;
+        send: ({ recipient, phone, subject, template, variables }: SendBroadcastParams) => Promise<import("axios").AxiosResponse<StatusResponse, any>>;
     };
     status: {
-        check: () => Promise<StatusResponse>;
+        check: () => Promise<import("axios").AxiosResponse<StatusResponse, any>>;
     };
     slack: {
         message: {
-            send: ({ channel, text }: SlackMessageParams) => Promise<StatusResponse>;
+            send: ({ channel, text }: SlackMessageParams) => Promise<import("axios").AxiosResponse<StatusResponse, any>>;
         };
         channels: {
-            list: () => Promise<SlackChannelsResponse>;
+            list: () => Promise<import("axios").AxiosResponse<SlackChannelsResponse, any>>;
         };
     };
 };

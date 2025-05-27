@@ -1,24 +1,10 @@
-import '../logger';
-export interface RequestConfig {
-    method?: string;
-    headers?: HeadersInit;
-    body?: any;
-}
-export declare class HttpClient {
-    private static instance;
-    private defaultHeaders;
-    defaultUrl: string;
-    private constructor();
-    static getInstance(): HttpClient;
-    static cloneInstance(baseUrl?: string, token?: string): HttpClient;
-    setBaseUrl(url: string): void;
-    setAuthorization(token: string): void;
-    setHeaders(headers: Record<string, any>): void;
-    get<T>(url: string, config?: RequestConfig): Promise<T>;
-    post<T>(url: string, body: any, config?: RequestConfig): Promise<T>;
-    put<T>(url: string, body?: any, config?: RequestConfig): Promise<T>;
-    delete<T>(url: string, config?: RequestConfig): Promise<T>;
-    private request;
-}
-export declare const client: HttpClient;
+import { AxiosInstance } from 'axios';
+type Client = AxiosInstance & {
+    setBaseUrl: (url: string) => void;
+    setAuthorization: (token: string) => void;
+    setHeaders: (headers: Record<string, any>) => void;
+    cloneInstance: (baseUrl?: string, token?: string) => Client;
+};
+declare const client: Client;
 export default client;
+export { client };

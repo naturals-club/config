@@ -1,83 +1,35 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.client = exports.HttpClient = void 0;
+exports.client = void 0;
+const axios_1 = __importDefault(require("axios"));
 const env_1 = require("../env");
-require("../logger");
-class HttpClient {
-    static instance;
-    defaultHeaders;
-    defaultUrl;
-    constructor(baseUrl, token) {
-        this.defaultUrl = baseUrl || env_1.ENV.NC_API_URL;
-        this.defaultHeaders = {
-            'Authorization': `Bearer ${token || env_1.ENV.NC_API_TOKEN}`,
-            'Content-Type': 'application/json'
-        };
-    }
-    static getInstance() {
-        if (!HttpClient.instance) {
-            HttpClient.instance = new HttpClient();
-        }
-        return HttpClient.instance;
-    }
-    static cloneInstance(baseUrl, token) {
-        return new HttpClient(baseUrl, token);
-    }
-    setBaseUrl(url) {
-        this.defaultUrl = url;
-    }
-    setAuthorization(token) {
-        this.defaultHeaders = {
-            ...this.defaultHeaders,
-            "Authorization": `Bearer ${token}`,
-        };
-    }
-    setHeaders(headers) {
-        this.defaultHeaders = {
-            ...this.defaultHeaders,
-            ...headers
-        };
-    }
-    async get(url, config = {}) {
-        return this.request('GET', url, config);
-    }
-    async post(url, body, config = {}) {
-        return this.request('POST', url, { ...config, body });
-    }
-    async put(url, body, config = {}) {
-        return this.request('PUT', url, { ...config, body });
-    }
-    async delete(url, config = {}) {
-        return this.request('DELETE', url, config);
-    }
-    async request(method, url, config) {
-        const fullUrl = this.defaultUrl + url;
-        const headers = { ...this.defaultHeaders, ...config.headers };
-        let body = null;
-        if (config.body instanceof FormData) {
-            body = config.body;
-            delete headers['Content-Type'];
-        }
-        else if (config.body) {
-            body = JSON.stringify(config.body);
-        }
-        console.info(`Requesting ${method}: ${fullUrl}`, { headers });
-        try {
-            const response = await fetch(fullUrl, { method, headers, body });
-            let data = response;
-            if (response.headers.get('Content-Type')?.includes('application/json'))
-                data = await response.json().catch(() => null);
-            if (!response.ok)
-                throw new Error(data?.message || `Request failed with status ${response.status}`);
-            console.info(`Response from ${method}: ${fullUrl}`);
-            return data;
-        }
-        catch (error) {
-            console.error(`Request failed for ${method} ${fullUrl}`, { error });
-            throw error;
-        }
-    }
-}
-exports.HttpClient = HttpClient;
-exports.client = HttpClient.getInstance();
-exports.default = exports.client;
+const client = axios_1.default.create({
+    baseURL: env_1.ENV.NC_API_URL,
+    headers: {
+        'Authorization': `Bearer ${env_1.ENV.NC_API_TOKEN}`,
+        'Content-Type': 'application/json',
+    },
+});
+exports.client = client;
+client.setBaseUrl = function (url) {
+    this.defaults.baseURL = url;
+};
+client.setAuthorization = function (token) {
+    this.defaults.headers['Authorization'] = `Bearer ${token}`;
+};
+client.setHeaders = function (headers) {
+    this.defaults.headers = {
+        ...this.defaults.headers,
+        ...headers,
+    };
+};
+client.cloneInstance = function (baseUrl, token) {
+    const clone = Object.assign({}, client);
+    clone.defaults.baseURL = baseUrl || this.defaults.baseURL;
+    clone.defaults.headers['Authorization'] = token ? `Bearer ${token}` : this.defaults.headers['Authorization'];
+    return clone;
+};
+exports.default = client;

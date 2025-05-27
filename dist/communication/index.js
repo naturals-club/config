@@ -1,9 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.communication = void 0;
-const client_1 = require("../api/client");
+const client_1 = __importDefault(require("../api/client"));
 const env_1 = require("../env");
-const client = client_1.HttpClient.cloneInstance();
+const client = client_1.default.cloneInstance();
 client.setBaseUrl(env_1.ENV.NC_COMMUNICATION_API_URL);
 client.setAuthorization(env_1.ENV.NC_COMMUNICATION_API_TOKEN);
 exports.communication = {

@@ -32,17 +32,17 @@ export declare const api: {
             agent: (id: string) => Promise<any>;
         };
         conversations: {
-            ai: (id: string | number, enabled: boolean) => Promise<unknown>;
-            list: () => Promise<unknown>;
+            ai: (id: string | number, enabled: boolean) => Promise<import("axios").AxiosResponse<any, any>>;
+            list: () => Promise<import("axios").AxiosResponse<any, any>>;
             messages: {
-                send: (id: string | number, message: string) => Promise<unknown>;
-                get: (id: string | number) => Promise<unknown>;
+                send: (id: string | number, message: string) => Promise<import("axios").AxiosResponse<any, any>>;
+                get: (id: string | number) => Promise<import("axios").AxiosResponse<any, any>>;
             };
         };
     };
     legal: {
-        privacy: () => Promise<unknown>;
-        terms: () => Promise<unknown>;
+        privacy: () => Promise<import("axios").AxiosResponse<any, any>>;
+        terms: () => Promise<import("axios").AxiosResponse<any, any>>;
     };
     contacts: CRUD & Record<string, any>;
     setup: {
@@ -51,12 +51,12 @@ export declare const api: {
         setAuthorization: (token: string) => void;
     };
     auth: {
-        me: () => Promise<unknown>;
-        signin: (data: any) => Promise<unknown>;
-        refresh: (refreshToken: any) => Promise<unknown>;
+        me: () => Promise<import("axios").AxiosResponse<any, any>>;
+        signin: (data: any) => Promise<import("axios").AxiosResponse<any, any>>;
+        refresh: (refreshToken: any) => Promise<import("axios").AxiosResponse<any, any>>;
         password: {
-            forgot: (data: any) => Promise<unknown>;
-            reset: (data: any) => Promise<unknown>;
+            forgot: (data: any) => Promise<import("axios").AxiosResponse<any, any>>;
+            reset: (data: any) => Promise<import("axios").AxiosResponse<any, any>>;
         };
     };
 };
