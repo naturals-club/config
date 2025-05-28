@@ -35,18 +35,16 @@ export const api = {
   },
   contacts: CRUD.merge("contacts", {
     forms: (contactId: string | number) => ({
-      create: (data: FormData) => {
-        if (data.has("contact"))
-          data.append("contact", contactId?.toString());
-
-        return client.post(`/contacts/forms`, data, {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        })
-      },
-      list: (params: any = {}) => client.get(`/contacts/forms?${new URLSearchParams({ ...params, contact: contactId }).toString()}`).then((res: any) => res.data),
+      create: (data: any) => client.post(`/contacts/forms`, { ...data, contact: contactId }),
+      list: (params: any = {}) =>
+        client
+          .get(`/contacts/forms?${new URLSearchParams({ ...params, contact: contactId }).toString()}`)
+          .then((res: any) => res.data),
       get: (formId: string | number) => client.get(`/contacts/forms/${formId}`),
+      addQuestion: (formId: string | number, questionData: any) =>
+        client.post(`/contacts/forms/${formId}/questions`, questionData),
+      updateStatus: (formId: string | number, status: "completed" | string) =>
+        client.put(`/contacts/forms/${formId}/status`, { status }),
     }),
     orders: (contactId: string) => ({
       create: (data: any) => client.post(`/contacts/orders`, { ...data, contact: contactId }),

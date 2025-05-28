@@ -37,17 +37,13 @@ exports.api = {
     },
     contacts: crud_1.CRUD.merge("contacts", {
         forms: (contactId) => ({
-            create: (data) => {
-                if (data.has("contact"))
-                    data.append("contact", contactId?.toString());
-                return client_1.client.post(`/contacts/forms`, data, {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    }
-                });
-            },
-            list: (params = {}) => client_1.client.get(`/contacts/forms?${new URLSearchParams({ ...params, contact: contactId }).toString()}`).then((res) => res.data),
+            create: (data) => client_1.client.post(`/contacts/forms`, { ...data, contact: contactId }),
+            list: (params = {}) => client_1.client
+                .get(`/contacts/forms?${new URLSearchParams({ ...params, contact: contactId }).toString()}`)
+                .then((res) => res.data),
             get: (formId) => client_1.client.get(`/contacts/forms/${formId}`),
+            addQuestion: (formId, questionData) => client_1.client.post(`/contacts/forms/${formId}/questions`, questionData),
+            updateStatus: (formId, status) => client_1.client.put(`/contacts/forms/${formId}/status`, { status }),
         }),
         orders: (contactId) => ({
             create: (data) => client_1.client.post(`/contacts/orders`, { ...data, contact: contactId }),
