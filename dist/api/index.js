@@ -42,7 +42,7 @@ exports.api = {
                 .get(`/contacts/forms?${new URLSearchParams({ ...params, contact: contactId }).toString()}`)
                 .then((res) => res.data),
             get: (formId) => client_1.client.get(`/contacts/forms/${formId}`),
-            addQuestion: (formId, questionData) => client_1.client.post(`/contacts/forms/${formId}/questions`, questionData),
+            addQuestion: (formId, question) => client_1.client.post(`/contacts/forms/${formId}/questions`, { questions: [question] }),
             updateStatus: (formId, status) => client_1.client.put(`/contacts/forms/${formId}/status`, { status }),
         }),
         orders: (contactId) => ({

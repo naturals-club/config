@@ -41,8 +41,8 @@ export const api = {
           .get(`/contacts/forms?${new URLSearchParams({ ...params, contact: contactId }).toString()}`)
           .then((res: any) => res.data),
       get: (formId: string | number) => client.get(`/contacts/forms/${formId}`),
-      addQuestion: (formId: string | number, questionData: any) =>
-        client.post(`/contacts/forms/${formId}/questions`, questionData),
+      addQuestion: (formId: string | number, question: any) =>
+        client.post(`/contacts/forms/${formId}/questions`, { questions: [question] }),
       updateStatus: (formId: string | number, status: "completed" | string) =>
         client.put(`/contacts/forms/${formId}/status`, { status }),
     }),
