@@ -25,33 +25,33 @@ client.interceptors.response.use((response: any) => {
 });
 
 client.setBaseUrl = function (url: string) {
-  this.defaults.baseURL = url;
+  client.defaults.baseURL = url;
 };
 
 client.setAuthorization = function (token: string) {
-  this.defaults.headers['Authorization'] = `Bearer ${token}`;
+  client.defaults.headers['Authorization'] = `Bearer ${token}`;
 };
 
 client.setHeaders = function (headers: Record<string, any>) {
-  this.defaults.headers = {
-    ...this.defaults.headers,
+  client.defaults.headers = {
+    ...client.defaults.headers,
     ...headers,
   };
 };
 
 client.cloneInstance = function (baseUrl?: string, token?: string): Client {
   const instance = axios.create({
-    baseURL: baseUrl || this.defaults.baseURL,
+    baseURL: baseUrl || client.defaults.baseURL,
     headers: {
-      ...this.defaults.headers,
-      Authorization: token ? `Bearer ${token}` : this.defaults.headers['Authorization'],
+      ...client.defaults.headers,
+      Authorization: token ? `Bearer ${token}` : client.defaults.headers['Authorization'],
     },
   }) as Client;
 
-  instance.setBaseUrl = this.setBaseUrl;
-  instance.setAuthorization = this.setAuthorization;
-  instance.setHeaders = this.setHeaders;
-  instance.cloneInstance = this.cloneInstance;
+  instance.setBaseUrl = client.setBaseUrl;
+  instance.setAuthorization = client.setAuthorization;
+  instance.setHeaders = client.setHeaders;
+  instance.cloneInstance = client.cloneInstance;
 
   return instance;
 };

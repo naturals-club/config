@@ -23,29 +23,29 @@ client.interceptors.response.use((response) => {
     return Promise.reject(error);
 });
 client.setBaseUrl = function (url) {
-    this.defaults.baseURL = url;
+    client.defaults.baseURL = url;
 };
 client.setAuthorization = function (token) {
-    this.defaults.headers['Authorization'] = `Bearer ${token}`;
+    client.defaults.headers['Authorization'] = `Bearer ${token}`;
 };
 client.setHeaders = function (headers) {
-    this.defaults.headers = {
-        ...this.defaults.headers,
+    client.defaults.headers = {
+        ...client.defaults.headers,
         ...headers,
     };
 };
 client.cloneInstance = function (baseUrl, token) {
     const instance = axios_1.default.create({
-        baseURL: baseUrl || this.defaults.baseURL,
+        baseURL: baseUrl || client.defaults.baseURL,
         headers: {
-            ...this.defaults.headers,
-            Authorization: token ? `Bearer ${token}` : this.defaults.headers['Authorization'],
+            ...client.defaults.headers,
+            Authorization: token ? `Bearer ${token}` : client.defaults.headers['Authorization'],
         },
     });
-    instance.setBaseUrl = this.setBaseUrl;
-    instance.setAuthorization = this.setAuthorization;
-    instance.setHeaders = this.setHeaders;
-    instance.cloneInstance = this.cloneInstance;
+    instance.setBaseUrl = client.setBaseUrl;
+    instance.setAuthorization = client.setAuthorization;
+    instance.setHeaders = client.setHeaders;
+    instance.cloneInstance = client.cloneInstance;
     return instance;
 };
 exports.default = client;
