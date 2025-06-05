@@ -15,6 +15,9 @@ export const api = {
     sessions: new CRUD("workout-sessions"),
   }),
   products: new CRUD("products"),
+  academy: CRUD.merge("academy", {
+    tracks: new CRUD("academy/tracks"),
+  }),
   states: new CRUD("states"),
   diets: new CRUD("diets"),
   foods: new CRUD("foods"),

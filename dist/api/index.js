@@ -17,6 +17,9 @@ exports.api = {
         sessions: new crud_1.CRUD("workout-sessions"),
     }),
     products: new crud_1.CRUD("products"),
+    academy: crud_1.CRUD.merge("academy", {
+        tracks: new crud_1.CRUD("academy/tracks"),
+    }),
     states: new crud_1.CRUD("states"),
     diets: new crud_1.CRUD("diets"),
     foods: new crud_1.CRUD("foods"),

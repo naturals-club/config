@@ -10,6 +10,7 @@ export declare const api: {
     consults: CRUD;
     workouts: CRUD & Record<string, any>;
     products: CRUD;
+    academy: CRUD & Record<string, any>;
     states: CRUD;
     diets: CRUD;
     foods: CRUD;
