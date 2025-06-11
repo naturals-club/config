@@ -1,5 +1,5 @@
-import axios, { AxiosInstance } from 'axios';
-import { ENV } from '../env';
+import axios, { AxiosInstance } from "axios";
+import { ENV } from "../env";
 
 type Client = AxiosInstance & {
   setBaseUrl: (url: string) => void;
@@ -10,8 +10,8 @@ type Client = AxiosInstance & {
 const client = axios.create({
   baseURL: ENV.NC_API_URL,
   headers: {
-    'Authorization': `Bearer ${ENV.NC_API_TOKEN}`,
-    'Content-Type': 'application/json',
+    "Authorization": `Bearer ${ENV.NC_API_TOKEN}`,
+    "Content-Type": "application/json",
   },
 }) as Client;
 
@@ -28,7 +28,7 @@ client.setBaseUrl = function (url: string) {
 };
 
 client.setAuthorization = function (token: string) {
-  client.defaults.headers['Authorization'] = `Bearer ${token}`;
+  client.defaults.headers["Authorization"] = `Bearer ${token}`;
 };
 
 client.setHeaders = function (headers: Record<string, any>) {
