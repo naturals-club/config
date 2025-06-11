@@ -5,7 +5,6 @@ type Client = AxiosInstance & {
   setBaseUrl: (url: string) => void;
   setAuthorization: (token: string) => void;
   setHeaders: (headers: Record<string, any>) => void;
-  cloneInstance: (baseUrl?: string, token?: string) => Client;
 }
 
 const client = axios.create({
@@ -37,23 +36,6 @@ client.setHeaders = function (headers: Record<string, any>) {
     ...client.defaults.headers,
     ...headers,
   };
-};
-
-client.cloneInstance = function (baseUrl?: string, token?: string): Client {
-  const instance = axios.create({
-    baseURL: baseUrl || client.defaults.baseURL,
-    headers: {
-      ...client.defaults.headers,
-      Authorization: token ? `Bearer ${token}` : client.defaults.headers['Authorization'],
-    },
-  }) as Client;
-
-  instance.setBaseUrl = client.setBaseUrl;
-  instance.setAuthorization = client.setAuthorization;
-  instance.setHeaders = client.setHeaders;
-  instance.cloneInstance = client.cloneInstance;
-
-  return instance;
 };
 
 export default client;

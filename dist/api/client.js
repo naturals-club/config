@@ -34,18 +34,4 @@ client.setHeaders = function (headers) {
         ...headers,
     };
 };
-client.cloneInstance = function (baseUrl, token) {
-    const instance = axios_1.default.create({
-        baseURL: baseUrl || client.defaults.baseURL,
-        headers: {
-            ...client.defaults.headers,
-            Authorization: token ? `Bearer ${token}` : client.defaults.headers['Authorization'],
-        },
-    });
-    instance.setBaseUrl = client.setBaseUrl;
-    instance.setAuthorization = client.setAuthorization;
-    instance.setHeaders = client.setHeaders;
-    instance.cloneInstance = client.cloneInstance;
-    return instance;
-};
 exports.default = client;
