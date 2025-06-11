@@ -15,7 +15,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("./env");
-__exportStar(require("./communication"), exports);
 __exportStar(require("./api/client"), exports);
 __exportStar(require("./api"), exports);
 __exportStar(require("./logger"), exports);
