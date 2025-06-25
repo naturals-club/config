@@ -16,6 +16,7 @@ export declare const api: {
     diets: CRUD;
     foods: CRUD;
     users: CRUD;
+    meals: CRUD;
     plans: CRUD;
     chats: {
         status: () => any;

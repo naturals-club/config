@@ -25,6 +25,7 @@ export const api = {
   diets: new CRUD("diets"),
   foods: new CRUD("foods"),
   users: new CRUD("users"),
+  meals: new CRUD("meals"),
   plans: new CRUD("plans"),
   chats: Chat,
   legal: {

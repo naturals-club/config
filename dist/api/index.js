@@ -27,6 +27,7 @@ exports.api = {
     diets: new crud_1.CRUD("diets"),
     foods: new crud_1.CRUD("foods"),
     users: new crud_1.CRUD("users"),
+    meals: new crud_1.CRUD("meals"),
     plans: new crud_1.CRUD("plans"),
     chats: chats_1.Chat,
     legal: {
