@@ -8,6 +8,9 @@ export const api = {
   documentTypes: new CRUD("document-types"),
   countries: new CRUD("countries"),
   exercises: new CRUD("exercises"),
+  trainings: CRUD.merge("trainings", {
+    levels: new CRUD("trainings/levels"),
+  }),
   students: new CRUD("students"),
   routines: new CRUD("routines"),
   consults: new CRUD("consults"),

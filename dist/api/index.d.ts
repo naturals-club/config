@@ -5,6 +5,7 @@ export declare const api: {
     documentTypes: CRUD;
     countries: CRUD;
     exercises: CRUD;
+    trainings: CRUD & Record<string, any>;
     students: CRUD;
     routines: CRUD;
     consults: CRUD;

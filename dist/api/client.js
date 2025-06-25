@@ -9,8 +9,8 @@ const env_1 = require("../env");
 const client = axios_1.default.create({
     baseURL: env_1.ENV.NC_API_URL,
     headers: {
-        'Authorization': `Bearer ${env_1.ENV.NC_API_TOKEN}`,
-        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${env_1.ENV.NC_API_TOKEN}`,
+        "Content-Type": "application/json",
     },
 });
 exports.client = client;
@@ -26,7 +26,7 @@ client.setBaseUrl = function (url) {
     client.defaults.baseURL = url;
 };
 client.setAuthorization = function (token) {
-    client.defaults.headers['Authorization'] = `Bearer ${token}`;
+    client.defaults.headers["Authorization"] = `Bearer ${token}`;
 };
 client.setHeaders = function (headers) {
     client.defaults.headers = {

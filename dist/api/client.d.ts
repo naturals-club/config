@@ -1,4 +1,4 @@
-import { AxiosInstance } from 'axios';
+import { AxiosInstance } from "axios";
 type Client = AxiosInstance & {
     setBaseUrl: (url: string) => void;
     setAuthorization: (token: string) => void;

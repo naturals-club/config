@@ -10,6 +10,9 @@ exports.api = {
     documentTypes: new crud_1.CRUD("document-types"),
     countries: new crud_1.CRUD("countries"),
     exercises: new crud_1.CRUD("exercises"),
+    trainings: crud_1.CRUD.merge("trainings", {
+        levels: new crud_1.CRUD("trainings/levels"),
+    }),
     students: new crud_1.CRUD("students"),
     routines: new crud_1.CRUD("routines"),
     consults: new crud_1.CRUD("consults"),
