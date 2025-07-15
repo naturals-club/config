@@ -4,7 +4,7 @@ export declare const api: {
     paymentMethods: CRUD;
     documentTypes: CRUD;
     countries: CRUD;
-    exercises: CRUD;
+    exercises: CRUD & Record<string, any>;
     trainings: CRUD & Record<string, any>;
     students: CRUD;
     routines: CRUD;

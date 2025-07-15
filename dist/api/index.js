@@ -9,7 +9,9 @@ exports.api = {
     paymentMethods: new crud_1.CRUD("payment-methods"),
     documentTypes: new crud_1.CRUD("document-types"),
     countries: new crud_1.CRUD("countries"),
-    exercises: new crud_1.CRUD("exercises"),
+    exercises: crud_1.CRUD.merge("exercises", {
+        infosRequest: (id, comment) => client_1.client.post(`/exercises/${id}/infos-request`, { comment }),
+    }),
     trainings: crud_1.CRUD.merge("trainings", {
         levels: new crud_1.CRUD("trainings/levels"),
     }),

@@ -7,7 +7,9 @@ export const api = {
   paymentMethods: new CRUD("payment-methods"),
   documentTypes: new CRUD("document-types"),
   countries: new CRUD("countries"),
-  exercises: new CRUD("exercises"),
+  exercises: CRUD.merge("exercises", {
+    infosRequest: (id: string, comment: string) => client.post(`/exercises/${id}/infos-request`, { comment }),
+  }),
   trainings: CRUD.merge("trainings", {
     levels: new CRUD("trainings/levels"),
   }),
