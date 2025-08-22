@@ -49,6 +49,7 @@ export declare const api: {
     };
     contacts: CRUD & Record<string, any>;
     setup: {
+        getAuthorization: () => any;
         setBaseUrl: (url: string) => void;
         setHeaders: (headers: Record<string, any>) => void;
         setAuthorization: (token: string) => void;
@@ -56,7 +57,7 @@ export declare const api: {
     auth: {
         me: () => Promise<import("axios").AxiosResponse<any, any>>;
         signin: (data: any) => Promise<import("axios").AxiosResponse<any, any>>;
-        refresh: (refreshToken: any) => Promise<import("axios").AxiosResponse<any, any>>;
+        refresh: (refreshToken: string) => Promise<import("axios").AxiosResponse<any, any>>;
         password: {
             forgot: (data: any) => Promise<import("axios").AxiosResponse<any, any>>;
             reset: (data: any) => Promise<import("axios").AxiosResponse<any, any>>;

@@ -34,4 +34,7 @@ client.setHeaders = function (headers) {
         ...headers,
     };
 };
+client.getHeaders = function () {
+    return client.defaults.headers;
+};
 exports.default = client;

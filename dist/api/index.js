@@ -63,6 +63,12 @@ exports.api = {
         }),
     }),
     setup: {
+        getAuthorization: () => {
+            const token = client_1.client.getHeaders().Authorization;
+            if (token && token?.startsWith("Bearer "))
+                return token.replace("Bearer ", "");
+            return null;
+        },
         setBaseUrl: client_1.client.setBaseUrl,
         setHeaders: client_1.client.setHeaders,
         setAuthorization: (token) => {

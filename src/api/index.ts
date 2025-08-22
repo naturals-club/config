@@ -64,6 +64,13 @@ export const api = {
     }),
   }),
   setup: {
+    getAuthorization: () => {
+      const token = client.getHeaders().Authorization;
+      if (token && token?.startsWith("Bearer "))
+        return token.replace("Bearer ", "");
+
+      return null;
+    },
     setBaseUrl: client.setBaseUrl,
     setHeaders: client.setHeaders,
     setAuthorization: (token: string) => {

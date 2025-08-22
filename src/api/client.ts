@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { ENV } from "../env";
 
 type Client = AxiosInstance & {
+  getHeaders: () => Record<string, any>;
   setBaseUrl: (url: string) => void;
   setAuthorization: (token: string) => void;
   setHeaders: (headers: Record<string, any>) => void;
@@ -36,6 +37,10 @@ client.setHeaders = function (headers: Record<string, any>) {
     ...client.defaults.headers,
     ...headers,
   };
+};
+
+client.getHeaders = function () {
+  return client.defaults.headers;
 };
 
 export default client;
