@@ -76,7 +76,11 @@ exports.api = {
         }
     },
     auth: {
-        me: () => client_1.client.get("/user"),
+        me: () => {
+            if (!getAuthorization())
+                throw new Error("Unauthorized");
+            return client_1.client.get("/user");
+        },
         signin: (data) => client_1.client.post("/auth", data),
         refresh: (refreshToken) => client_1.client.put("/auth", {}, { headers: { Authorization: `Bearer ${refreshToken}` } }),
         password: {
@@ -84,4 +88,10 @@ exports.api = {
             reset: (data) => client_1.client.post("/auth/reset-password", data),
         }
     }
+};
+const getAuthorization = () => {
+    const token = client_1.client.getHeaders().Authorization;
+    if (token && token?.startsWith("Bearer "))
+        return token.replace("Bearer ", "");
+    return null;
 };
