@@ -76,13 +76,13 @@ exports.api = {
         }
     },
     auth: {
-        me: () => {
+        me: (params) => {
             if (!getAuthorization())
                 throw new Error("Unauthorized");
-            return client_1.client.get("/user");
+            return client_1.client.get("/user?" + new URLSearchParams(params));
         },
-        signin: (data) => client_1.client.post("/auth", data),
-        refresh: (refreshToken) => client_1.client.put("/auth", {}, { headers: { Authorization: `Bearer ${refreshToken}` } }),
+        signin: (data, params) => client_1.client.post("/auth" + new URLSearchParams(params), data),
+        refresh: (refreshToken, params) => client_1.client.put("/auth?" + new URLSearchParams(params), {}, { headers: { Authorization: `Bearer ${refreshToken}` } }),
         password: {
             forgot: (data) => client_1.client.post("/auth/forgot-password", data),
             reset: (data) => client_1.client.post("/auth/reset-password", data),

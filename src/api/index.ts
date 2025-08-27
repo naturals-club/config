@@ -78,14 +78,14 @@ export const api = {
     }
   },
   auth: {
-    me: () => {
+    me: (params?: Record<string, any>) => {
       if (!getAuthorization())
         throw new Error("Unauthorized");
 
-      return client.get("/user");
+      return client.get("/user?" + new URLSearchParams(params));
     },
-    signin: (data: any) => client.post("/auth", data),
-    refresh: (refreshToken: string) => client.put("/auth", {}, { headers: { Authorization: `Bearer ${refreshToken}` } }),
+    signin: (data: any, params?: Record<string, any>) => client.post("/auth" + new URLSearchParams(params), data),
+    refresh: (refreshToken: string, params?: Record<string, any>) => client.put("/auth?" + new URLSearchParams(params), {}, { headers: { Authorization: `Bearer ${refreshToken}` } }),
     password: {
       forgot: (data: any) => client.post("/auth/forgot-password", data),
       reset: (data: any) => client.post("/auth/reset-password", data),

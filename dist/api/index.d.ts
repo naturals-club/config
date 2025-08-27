@@ -55,9 +55,9 @@ export declare const api: {
         setAuthorization: (token: string) => void;
     };
     auth: {
-        me: () => Promise<import("axios").AxiosResponse<any, any>>;
-        signin: (data: any) => Promise<import("axios").AxiosResponse<any, any>>;
-        refresh: (refreshToken: string) => Promise<import("axios").AxiosResponse<any, any>>;
+        me: (params?: Record<string, any>) => Promise<import("axios").AxiosResponse<any, any>>;
+        signin: (data: any, params?: Record<string, any>) => Promise<import("axios").AxiosResponse<any, any>>;
+        refresh: (refreshToken: string, params?: Record<string, any>) => Promise<import("axios").AxiosResponse<any, any>>;
         password: {
             forgot: (data: any) => Promise<import("axios").AxiosResponse<any, any>>;
             reset: (data: any) => Promise<import("axios").AxiosResponse<any, any>>;
