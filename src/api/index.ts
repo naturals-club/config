@@ -84,7 +84,7 @@ export const api = {
 
       return client.get("/user?" + new URLSearchParams(params));
     },
-    signin: (data: any, params?: Record<string, any>) => client.post("/auth" + new URLSearchParams(params), data),
+    signin: (data: any, params?: Record<string, any>) => client.post("/auth?" + new URLSearchParams(params), data),
     refresh: (refreshToken: string, params?: Record<string, any>) => client.put("/auth?" + new URLSearchParams(params), {}, { headers: { Authorization: `Bearer ${refreshToken}` } }),
     password: {
       forgot: (data: any) => client.post("/auth/forgot-password", data),
