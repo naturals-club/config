@@ -46,6 +46,7 @@ exports.api = {
     },
     contacts: crud_1.CRUD.merge("contacts", {
         forms: (contactId) => ({
+            tokens: () => client_1.client.post("/contacts/forms/tokens").then((res) => res.data),
             create: (data) => client_1.client.post(`/contacts/forms`, { ...data, contact: contactId }),
             list: (params = {}) => client_1.client
                 .get(`/contacts/forms?${new URLSearchParams({ ...params, contact: contactId }).toString()}`)
