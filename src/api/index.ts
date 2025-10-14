@@ -44,7 +44,7 @@ export const api = {
   },
   contacts: CRUD.merge("contacts", {
     forms: (contactId?: string | number) => ({
-      tokens: () => client.post("/contacts/forms/tokens").then((res: any) => res.data),
+      tokens: () => client.get("/contacts/forms/tokens").then((res: any) => res.data),
       create: (data: any) => client.post(`/contacts/forms`, { ...data, contact: contactId }),
       list: (params: any = {}) =>
         client
