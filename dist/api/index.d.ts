@@ -3,6 +3,7 @@ export declare const api: {
     workoutSessions: CRUD;
     paymentMethods: CRUD;
     documentTypes: CRUD;
+    homeMeasures: CRUD;
     countries: CRUD;
     exercises: CRUD & Record<string, any>;
     trainings: CRUD & Record<string, any>;

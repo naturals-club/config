@@ -8,6 +8,7 @@ exports.api = {
     workoutSessions: new crud_1.CRUD("workout-sessions"),
     paymentMethods: new crud_1.CRUD("payment-methods"),
     documentTypes: new crud_1.CRUD("document-types"),
+    homeMeasures: new crud_1.CRUD("home-measures"),
     countries: new crud_1.CRUD("countries"),
     exercises: crud_1.CRUD.merge("exercises", {
         infosRequest: (id, comment) => client_1.client.post(`/exercises/${id}/infos-request`, { comment }),
